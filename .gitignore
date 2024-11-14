@@ -1,0 +1,4 @@
+/venv/
+/migrations/
+local.sqlite
+requirements.txt
