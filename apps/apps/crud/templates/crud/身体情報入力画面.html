@@ -1,0 +1,41 @@
+{% extends "crud/base.html" %}
+{% block title %}ユーザー新規作成{% endblock %}
+{% block content %}
+<h2>身体情報入力</h2>
+<form action="{{ url_for('crud.user_body') }}" method="POST" novalidate="novalidate">
+    {{ form.csrf_token }}
+    <p>
+        {{ form.age.label }} {{ form.age(placeholder="年齢") }}
+    </p>
+    {% for error in form.age.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+
+
+    <p>
+        {{ form.sex.label }} {{ form.sex(placeholder="性別") }}
+    </p>
+    {% for error in form.sex.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+
+
+    <p>
+        {{ form.height.label }} {{ form.height(placeholder="身長") }}
+    </p>
+    {% for error in form.height.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+
+
+    <p>
+        {{ form.weight.label }} {{ form.weight(placeholder="体重") }}
+    </p>
+    {% for error in form.weight.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+
+
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

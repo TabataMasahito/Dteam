@@ -1,0 +1,32 @@
+{% extends 'crud/base.html' %}
+{% block title %}ユーザー編集{% endblock %}
+{% block content %}
+<h2>ユーザー編集</h2>
+<form action="{{ url_for('crud.edit_user', user_id=user.user_id) }}" method="POST" novalidate="novalidate">
+    
+    {{ form.csrf_token }}
+
+    <p>
+        {{ form.age.label }} {{ form.age(placeholder="年齢") }}
+    </p>
+    {% for error in form.age.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+    <p>
+        {{ form.height.label }} {{ form.height(placeholder="身長") }}
+    </p>
+    {% for error in form.height.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+
+    <p>
+        {{ form.weight.label }} {{ form.weight(placeholder="体重") }}
+    </p>
+    {% for error in form.weight.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+
+    <p><input type="submit" value="更新" /></p>
+</form>
+
+{% endblock %}
