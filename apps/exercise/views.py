@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from apps.exercise.forms import ModeSelectForm,WeightRecordForm
+from apps.exercise.forms import ModeSelectForm,WeightRecordForm,GoolSettingForm
 from flask import Blueprint, render_template, flash, url_for, redirect, request,session
 
 from flask_login import login_user,logout_user
@@ -18,7 +18,7 @@ def mode_select():
         # ユーザー情報を取得
 
         # 身体情報入力画面へリダイレクト
-        return redirect(url_for("auth.bodycreate"))
+        return redirect(url_for("exercise.goal_setting"))
 
     return render_template("exercise/modeselect.html", form=form)
 
@@ -29,5 +29,5 @@ def weight_record():
 
 @dt.route("/goalsetting")
 def goal_setting():
-    form = GoalSettingForm()
+    form = GoolSettingForm()
     return render_template("exercise/goal_setting.html", form=form)
