@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from apps.exercise.forms import ModeSelectForm
+from apps.exercise.forms import ModeSelectForm,WeightRecordForm
 from flask import Blueprint, render_template, flash, url_for, redirect, request,session
 
 from flask_login import login_user,logout_user
@@ -24,5 +24,5 @@ def mode_select():
 
 @dt.route("/weightrecord")
 def weight_record():
-    form = ModeSelectForm()
+    form = WeightRecordForm()
     return render_template("exercise/weight_record.html", form=form)

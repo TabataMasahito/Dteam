@@ -5,7 +5,7 @@
 <form action="{{ url_for('exercise.weight_record') }}" method="POST" novalidate="novalidate">
     {{ form.csrf_token }}
     <p>
-        {{ form.recordweight.label }} {{ form.recordweight(placeholder="体重:kg") }}
+    {{ form.recordweight(placeholder="体重") }}kg
     </p>
     {% for error in form.recordweight.errors %}
     <span style="color: red;">{{ error }}</span>

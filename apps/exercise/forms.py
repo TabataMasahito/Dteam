@@ -9,3 +9,13 @@ class ModeSelectForm(FlaskForm):
         ('健康維持', '健康維持モード')
     ], validators=[DataRequired()])
     submit = SubmitField('次へ')
+
+class WeightRecordForm(FlaskForm):
+    recordweight = FloatField(
+        "体重",
+        validators=[
+                DataRequired(message="体重は必須です。"),
+                NumberRange(1,150,message="正しい数字を入力してください。")
+            ]
+        )
+    submit = SubmitField('登録')
