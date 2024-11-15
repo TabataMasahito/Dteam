@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, SubmitField,IntegerField,RadioField,FloatField
+from wtforms import PasswordField, StringField, SubmitField,IntegerField,RadioField,FloatField,SelectField
 from wtforms.validators import DataRequired, Email, length,NumberRange
 # ユーザー新規作成とユーザー編集フォームクラス
 class SignupUser(FlaskForm):
@@ -29,7 +29,7 @@ class CreateBody(FlaskForm):
             NumberRange(1,150,message="正しい数字を入力してください。")
         ]
     )
-    sex=RadioField(
+    sex=SelectField(
         "性別",choices=[('男', '男性'), ('女', '女性')],
         validators=[
             DataRequired('性別を選択してください。')]
