@@ -10,7 +10,7 @@
     {% endfor %}
     {{ form.csrf_token }}
     <p>
-    {{ form.age(class="form-control dt-auth-input",placeholder="年齢") }}</p>
+    {{ form.age(class="form-control dt-auth-input",placeholder="年齢") }}歳</p>
     {% for error in form.age.errors %}
     <span style="color: red;">{{ error }}</span>
     {% endfor %}
@@ -18,11 +18,11 @@
     {% for error in form.sex.errors %}
     <span style="color: red;">{{ error }}</span>
     {% endfor %}
-    <p>{{ form.height(class="form-control dt-auth-input",placeholder="身長") }}</p>
+    <p>{{ form.height(class="form-control dt-auth-input",placeholder="身長") }}cm</p>
     {% for error in form.height.errors %}
     <span style="color: red;">{{ error }}</span>
     {% endfor %}
-    <p>{{ form.weight(class="form-control dt-auth-input",placeholder="体重") }}</p>
+    <p>{{ form.weight(class="form-control dt-auth-input",placeholder="体重") }}kg</p>
     {% for error in form.weight.errors %}
     <span style="color: red;">{{ error }}</span>
     {% endfor %}

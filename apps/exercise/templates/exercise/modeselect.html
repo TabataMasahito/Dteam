@@ -1,0 +1,21 @@
+{% extends "exercise/base.html" %}
+{% block title %}運動モード選択{% endblock %}
+{% block content %}
+<div class="mx-auto dt-auth-main">
+    <div class="card dt-auth-signup">
+        <header>運動モード選択</header>
+        <section>
+            <form action="{{ url_for('exercise.mode_select') }}" method="POST" novalidate="novalidate" class="form-signin">
+                {{ form.csrf_token }}
+                <p>
+                    {{ form.mode(class="form-control dt-auth-input") }}
+                </p>
+                {% for error in form.mode.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+                <p>{{ form.submit(class="btn btn-md btn-primary btn-block dt-auth-btn") }}</p>
+            </form>
+        </section>
+    </div>
+</div>
+{% endblock %}
