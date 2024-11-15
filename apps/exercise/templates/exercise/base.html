@@ -12,10 +12,11 @@
         <a class="navbar-brand " href="{{ url_for('exercise.index') }}"></a>
     
         <ul class="navbar-nav">
+
+            {% if current_user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link">ログイン中</a>
             </li>
-            {% if current_user.is_authenticated %}
             <li class="nav-item">
                 <span class="nav-link">{{ current_user.username }}</span>
             </li>
