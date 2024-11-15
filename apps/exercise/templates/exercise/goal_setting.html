@@ -1,0 +1,31 @@
+{% extends "exercise/base.html" %}
+{% block title %}目標設定{% endblock %}
+{% block content %}
+<a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+<h2>目標設定</h2>
+<form action="{{ url_for('exercise.goal_setting') }}" method="POST" novalidate="novalidate">
+    {{ form.csrf_token }}
+    <p>
+    {{ form.period(placeholder="目標期間") }}日
+    </p>
+    {% for error in form.period.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+
+    <p>
+    {{ form.goalweight(placeholder="目標体重") }}kg
+    </p>
+    {% for error in form.goalweight.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+
+    <p>
+    {{ form.numberexercisesweek(placeholder="週に何日利用するか") }}日
+    </p>
+    {% for error in form.numberexercisesweek.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

@@ -26,3 +26,8 @@ def mode_select():
 def weight_record():
     form = WeightRecordForm()
     return render_template("exercise/weight_record.html", form=form)
+
+@dt.route("/goalsetting")
+def goal_setting():
+    form = GoalSettingForm()
+    return render_template("exercise/goal_setting.html", form=form)

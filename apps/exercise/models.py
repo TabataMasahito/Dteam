@@ -18,6 +18,6 @@ class ExercisePlan(db.Model):
     id = db.Column(db.String, primary_key=True)
     user_id = db.Column(db.String, db.ForeignKey("acount.id"))
     mode = db.Column(db.String(5))
-    period = db.Column(db.String)
+    period = db.Column(db.Integer)
     goalweight = db.Column(db.Float)
     numberexercisesweek = db.Column(db.Integer)
