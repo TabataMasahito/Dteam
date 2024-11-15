@@ -10,7 +10,8 @@ dt = Blueprint("exercise", __name__, template_folder="templates")
 @dt.route("/")
 def index():
     return render_template("exercise/index.html")
-@dt.route("/signup", methods=["GET", "POST"])
+
+@dt.route("/modeselect", methods=["GET", "POST"])
 def mode_select():
     form = ModeSelectForm()
     if form.validate_on_submit():
@@ -20,3 +21,7 @@ def mode_select():
         return redirect(url_for("auth.bodycreate"))
 
     return render_template("exercise/modeselect.html", form=form)
+
+@dt.route("/weightrecord")
+def weight_record():
+    return render_template("exercise/weight_record.html")
