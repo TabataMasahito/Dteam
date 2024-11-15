@@ -24,4 +24,5 @@ def mode_select():
 
 @dt.route("/weightrecord")
 def weight_record():
-    return render_template("exercise/weight_record.html")
+    form = ModeSelectForm()
+    return render_template("exercise/weight_record.html", form=form)

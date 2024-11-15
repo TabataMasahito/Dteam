@@ -1,8 +1,8 @@
-{% extends "crud/base.html" %}
+{% extends "exercise/base.html" %}
 {% block title %}体重記録{% endblock %}
 {% block content %}
 <h2>体重記録</h2>
-<form action="{{ url_for('') }}" method="POST" novalidate="novalidate">
+<form action="{{ url_for('exercise.weight_record') }}" method="POST" novalidate="novalidate">
     {{ form.csrf_token }}
     <p>
         {{ form.recordweight.label }} {{ form.recordweight(placeholder="体重:kg") }}
