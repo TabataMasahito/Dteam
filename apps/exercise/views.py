@@ -32,10 +32,10 @@ def goal_setting():
         mode = session.get('mode')
         getid=current_user.id
         # DB内で同じuser_idを持つレコードの数を取得
-        count = WeightRecord.query.filter_by(user_id=getid).count()
+        count = ExercisePlan.query.filter_by(user_id=getid).count()
         # 新しいidを生成 (renameにcountを結合)
-        new_id = getid+"plan"+count + 1
-        exerciseplan = WeightRecord(
+        new_id = getid+"plan"+str(count + 1)
+        exerciseplan = ExercisePlan(
             id=new_id,
             user_id=getid,
             mode=mode,
@@ -54,7 +54,7 @@ def goal_setting():
 @dt.route("/plansettingconplete")
 @login_required
 def paln_setting_complete():
-    return render_template("exercise.paln_setting_complete.html")
+    return render_template("exercise/plan_setting_complete.html")
 
 
 
