@@ -1,0 +1,11 @@
+{% extends "exercise/base.html" %}
+{% block title %}プラン設定{% endblock %}
+{% block content %}
+<h2>プラン設定</h2>
+<form action="{{ url_for('exercise.plan_setting_complete') }}" method="POST" novalidate="novalidate">
+    <p>
+    運動プランの設定が完了しました
+    </p>
+</form>
+<a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+{% endblock %}
