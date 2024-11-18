@@ -35,3 +35,8 @@ def weight_record():
 def goal_setting():
     form = GoolSettingForm()
     return render_template("exercise/goal_setting.html", form=form)
+
+@dt.route("/confirmyourgoal")
+@login_required
+def confirm_your_goal():
+    return render_template("exercise/confirm_your_goal.html")
