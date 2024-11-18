@@ -3,18 +3,12 @@
 {% block content %}
 <a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
 <h2>目標確認</h2>
-<form action="{{ url_for('exercise.confirm_your_goal') }}" method="POST" novalidate="novalidate">
     <p>
-    目標期間まで残り日、
+    目標期間まで残り（自分で考えて）日、
     </p>
 
-    <p>
-    目標体重まで残りkgです！
-    </p>
+    <p>目標体重まで残り: <strong>{{ remaining_weight }}</strong> kg</p>
 
-    <p>
-    頑張りましょう！
-    </p>
-
-</form>
+    <p>頑張りましょう！</p>
 {% endblock %}
+

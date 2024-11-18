@@ -21,4 +21,5 @@ class ExercisePlan(db.Model):
     period = db.Column(db.Integer)
     goalweight = db.Column(db.Float)
     numberexercisesweek = db.Column(db.Integer)
+    record_at = db.Column(db.Date, default=datetime.now().date)  
 
