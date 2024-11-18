@@ -2,15 +2,15 @@
 from werkzeug.security import generate_password_hash
 from apps.app import db, login_manager
 from flask_login import UserMixin
-from datetime import date
+from datetime import datetime  # 修正箇所を含む必要モジュール
 from werkzeug.security import check_password_hash, generate_password_hash
-class WeightRecord(db.Model):    # テーブル名を指定する
+class WeightRecord(db.Model):    
     __tablename__ = "weightrecord"
     # カラムを定義する
     id = db.Column(db.String, primary_key=True)
     user_id = db.Column(db.String, db.ForeignKey("acount.id"))
     recordweight = db.Column(db.Float)
-    record_at = db.Column(db.Date, default=date.now)
+    record_at = db.Column(db.Date, default=datetime.now().date)  
 
 class ExercisePlan(db.Model):
     __tablename__ = "exerciseplan"
@@ -21,3 +21,4 @@ class ExercisePlan(db.Model):
     period = db.Column(db.Integer)
     goalweight = db.Column(db.Float)
     numberexercisesweek = db.Column(db.Integer)
+
