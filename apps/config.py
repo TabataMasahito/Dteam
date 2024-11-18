@@ -6,14 +6,25 @@ class BaseConfig:
     WTF_CSRF_SECRET_KEY = "AuwzyszU5sugKN7KZs6f"
 # BaseConfigクラスを継承してLocalConfigクラスを作成する
 class LocalConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = f"sqlite:///{basedir / 'local.sqlite'}"
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{user}:{password}@{host}/{name}'.format(**{
+        'user': 'postgres',
+        'password': 'unpo',
+        'host': 'localhost:5432',
+        'name': 'DteamDB'
+    })
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = True
 # BaseConfigクラスを継承してTestingConfigクラスを作成する
 class TestingConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = f"sqlite:///{basedir / 'testing.sqlite'}"
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{user}:{password}@{host}/{name}'.format(**{
+        'user': 'postgres',
+        'password': 'unpo',
+        'host': 'localhost:5432',
+        'name': 'DteamDB'
+    })
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     WTF_CSRF_ENABLED = False
+
 # config辞書にマッピングする
 config = {
     "testing": TestingConfig,
