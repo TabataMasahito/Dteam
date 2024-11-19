@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, flash, url_for, redirect, request,
 from apps.exercise.models import WeightRecord,ExercisePlan
 from apps.app import db
 from flask_login import login_user,logout_user,login_required,current_user
-from datetime import datetime
+from datetime import datetime,timedelta,date
 from sqlalchemy import desc
 
 # template_folderを指定する（staticは指定しない）
@@ -58,10 +58,6 @@ def paln_setting_complete():
     return render_template("exercise/plan_setting_complete.html")
 
 
-
-
-from datetime import datetime
-
 @dt.route("/weightrecord", methods=["GET", "POST"])
 @login_required
 def weight_record():
@@ -101,10 +97,33 @@ def weight_record_complete():
     return render_template("exercise/weight_record_complete.html")
 
 
+
 @dt.route("/confirmyourgoal")
 @login_required
 def confirm_your_goal():
     user_id = current_user.id
+    today = date.today()
+
+    record_at = (
+        ExercisePlan.query.filter_by(user_id=user_id)
+        .order_by(desc(ExercisePlan.record_at))
+        .first()
+    )
+    if record_at:
+        record_at = record_at.record_at  # 必要に応じて型変換
+        if isinstance(record_at, str):
+            record_at = datetime.strptime(record_at, "%Y-%m-%d").date()
+
+    period = (
+        ExercisePlan.query.filter_by(user_id=user_id)
+        .order_by(desc(ExercisePlan.period))
+        .first()
+    )
+    period = int(period.period)  # 必要に応じて型変換
+
+    
+    future_date = record_at + timedelta(days=period)
+    remainingdays = future_date - today
 
     latest_weight_record = (
         WeightRecord.query.filter_by(user_id=user_id)
@@ -118,8 +137,12 @@ def confirm_your_goal():
 
     remaining_weight = nowweight - goalweight
 
+    future_date = record_at + timedelta(days=period)
+    remainingdays = future_date - today
+
     return render_template(
         "exercise/confirm_your_goal.html",
 
         remaining_weight=remaining_weight,
+        remainingdays=remainingdays.days
     )
