@@ -4,7 +4,6 @@ from apps.crud.models import User
 from flask import Blueprint, render_template, flash, url_for, redirect, request,session
 
 from flask_login import login_user,logout_user
-# Blueprintを使ってauthを生成する
 auth = Blueprint(
     "auth",
     __name__,
@@ -15,6 +14,7 @@ auth = Blueprint(
 def index():
     return render_template("auth/index.html")
 
+# ユーザー情報作成のエンドポイント
 @auth.route("/signup", methods=["GET", "POST"])
 def signup():
     form = SignupUser()
@@ -36,10 +36,11 @@ def signup():
         # 身体情報入力画面へリダイレクト
         return redirect(url_for("auth.bodycreate"))
 
-    # 初期表示またはエラー時のcreate.htmlを表示
+    # エラー時のcreate.htmlを表示
     return render_template("auth/signup.html", form=form)
 
 
+# 身体情報作成のエンドポイント
 @auth.route("/bodycreate", methods=["GET", "POST"])
 
 def bodycreate():
@@ -81,7 +82,7 @@ def bodycreate():
 
 
 
-
+# ログインのエンドポイント
 @auth.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
