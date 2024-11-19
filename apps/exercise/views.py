@@ -153,3 +153,9 @@ def confirm_your_goal():
 @login_required
 def weight_transition_check():
     return render_template("exercise/weight_transition_check.html")
+
+# dtアプリケーションを使ってのエンドポイントを作成する
+@dt.route("/useredit")
+@login_required
+def user_edit():
+    return render_template("exercise/user_edit.html")
