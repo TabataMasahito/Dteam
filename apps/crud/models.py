@@ -1,4 +1,4 @@
-
+#田端将人
 from werkzeug.security import generate_password_hash
 from apps.app import db, login_manager
 from flask_login import UserMixin

@@ -1,3 +1,4 @@
+#田端将人
 from apps.exercise.forms import ModeSelectForm,WeightRecordForm,GoolSettingForm
 from flask import Blueprint, render_template, flash, url_for, redirect, request,session
 from apps.exercise.models import WeightRecord,ExercisePlan
