@@ -14,6 +14,7 @@ dt = Blueprint("exercise", __name__, template_folder="templates")
 def index():
     return render_template("exercise/index.html")
 
+# dtアプリケーションを使ってmodeselectのエンドポイントを作成する
 @dt.route("/modeselect", methods=["GET", "POST"])
 @login_required
 def mode_select():
@@ -25,6 +26,7 @@ def mode_select():
 
     return render_template("exercise/modeselect.html", form=form)
 
+# dtアプリケーションを使ってgoalsettingのエンドポイントを作成する
 @dt.route("/goalsetting", methods=["GET", "POST"])
 @login_required
 def goal_setting():
@@ -47,17 +49,16 @@ def goal_setting():
         db.session.add(exerciseplan)
         db.session.commit()
         return redirect(url_for("exercise.paln_setting_complete"))
-
-        
-
+    
     return render_template("exercise/goal_setting.html", form=form)
 
+# dtアプリケーションを使ってplansettingconpleteのエンドポイントを作成する
 @dt.route("/plansettingconplete")
 @login_required
 def paln_setting_complete():
     return render_template("exercise/plan_setting_complete.html")
 
-
+# dtアプリケーションを使ってweightrecordのエンドポイントを作成する
 @dt.route("/weightrecord", methods=["GET", "POST"])
 @login_required
 def weight_record():
@@ -90,14 +91,13 @@ def weight_record():
 
     return render_template("exercise/weight_record.html", form=form)
 
-
+# dtアプリケーションを使ってweightrecordconpleteのエンドポイントを作成する
 @dt.route("/weightrecordconplete")
 @login_required
 def weight_record_complete():
     return render_template("exercise/weight_record_complete.html")
 
-
-
+# dtアプリケーションを使ってconfirmyourgoalのエンドポイントを作成する
 @dt.route("/confirmyourgoal")
 @login_required
 def confirm_your_goal():
@@ -146,3 +146,9 @@ def confirm_your_goal():
         remaining_weight=remaining_weight,
         remainingdays=remainingdays.days
     )
+
+# dtアプリケーションを使ってweighttransitioncheckのエンドポイントを作成する
+@dt.route("/weighttransitioncheck")
+@login_required
+def weight_transition_check():
+    return render_template("exercise/weight_transition_check.html")
