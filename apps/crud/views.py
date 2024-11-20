@@ -81,21 +81,19 @@ def user_body():
 
 
 # ユーザーの編集エンドポイント
-# @crud.route("/users/<user_id>", methods=["GET", "POST"])
-# @login_required
-
-# def edit_user(user_id):
-#     form = BodyForm()
-#     user = User.query.filter_by(user_id=id).first()
-#     if form.validate_on_submit():
-#         id=user_id,
-#         username=username,
-#         password=password,
-#         sex=sex,
-#         user.age = form.age.data
-#         user.height = form.height.data
-#         user.weight = form.weight.data
-#         db.session.commit()
-#         return redirect(url_for("crud.users"))
-#     return render_template("crud/edit.html", user=user, form=form)
-
+#@crud.route("/users/<user_id>", methods=["GET", "POST"])
+#@login_required
+#def edit_user(user_id):
+#    form = BodyForm()
+#    user = User.query.filter_by(user_id=id).first()
+#    if form.validate_on_submit():
+#        id=user_id,
+#        username=username,
+#        password=password,
+#        sex=sex,
+#        user.age = form.age.data
+#        user.height = form.height.data
+#        user.weight = form.weight.data
+#        db.session.commit()
+#        return redirect(url_for("crud.users"))
+#    return render_template("crud/edit.html", user=user, form=form)
