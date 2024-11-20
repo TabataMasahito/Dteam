@@ -2,6 +2,51 @@
 {% block title %}体重推移確認{% endblock %}
 {% block content %}
 <a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <h2>体重推移確認</h2>
+<canvas id="weightChart" width="40" height="20"></canvas>
+<script>
+    // グラフの描画
+    async function drawChart() {
+        const response = await fetch("/api/weight_data");
+        const data = await response.json();
 
+        const labels = data.map(record => record.date);
+        const weights = data.map(record => record.weight);
+
+        const ctx = document.getElementById("weightChart").getContext("2d");
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "体重(kg)",
+                    data: weights,
+                    borderColor: "rgba(75, 192, 192, 1)",
+                    backgroundColor: "rgba(75, 192, 192, 0.2)",
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: "日付"
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: "体重(kg)"
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    drawChart();
+</script>
 {% endblock %}

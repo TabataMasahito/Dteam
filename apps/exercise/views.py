@@ -1,6 +1,6 @@
 #田端将人
 from apps.exercise.forms import ModeSelectForm,WeightRecordForm,GoolSettingForm
-from flask import Blueprint, render_template, flash, url_for, redirect, request,session
+from flask import Blueprint, render_template, flash, url_for, redirect, request,session,jsonify
 from apps.exercise.models import WeightRecord,ExercisePlan
 from apps.app import db
 from flask_login import login_user,logout_user,login_required,current_user
@@ -149,13 +149,23 @@ def confirm_your_goal():
     )
 
 # dtアプリケーションを使ってweighttransitioncheckのエンドポイントを作成する
-@dt.route("/weighttransitioncheck")
-@login_required
-def weight_transition_check():
-    return render_template("exercise/weight_transition_check.html")
+#@dt.route("/weighttransitioncheck")
+#@login_required
+#def weight_transition_check():
+#    return render_template("exercise/weight_transition_check.html")
 
 # dtアプリケーションを使ってのエンドポイントを作成する
 @dt.route("/useredit")
 @login_required
 def user_edit():
     return render_template("exercise/user_edit.html")
+
+@dt.route("/api/weight_data")
+def weight_data():
+    records = WeightRecord.query.order_by(WeightRecord.record_at).all()
+    data = [{"date": record.record_at.strftime("%Y-%m-%d"), "weight": record.recordweight} for record in records]
+    return jsonify(data)
+
+@dt.route("/weighttransitioncheck")
+def weight_transition_check():
+    return render_template("exercise/weight_transition_check.html")
