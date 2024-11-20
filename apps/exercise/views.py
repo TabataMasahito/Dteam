@@ -148,12 +148,6 @@ def confirm_your_goal():
         remainingdays=remainingdays.days
     )
 
-# dtアプリケーションを使ってweighttransitioncheckのエンドポイントを作成する
-#@dt.route("/weighttransitioncheck")
-#@login_required
-#def weight_transition_check():
-#    return render_template("exercise/weight_transition_check.html")
-
 # dtアプリケーションを使ってのエンドポイントを作成する
 @dt.route("/useredit")
 @login_required
@@ -166,6 +160,7 @@ def weight_data():
     data = [{"date": record.record_at.strftime("%Y-%m-%d"), "weight": record.recordweight} for record in records]
     return jsonify(data)
 
+# dtアプリケーションを使ってweighttransitioncheckのエンドポイントを作成する
 @dt.route("/weighttransitioncheck")
 def weight_transition_check():
     return render_template("exercise/weight_transition_check.html")
