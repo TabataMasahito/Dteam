@@ -137,6 +137,7 @@ def confirm_your_goal():
     goalweight = exercise_plan.goalweight  # 目標体重
 
     remaining_weight = nowweight - goalweight
+    remaining_weight = round(remaining_weight, 1)
 
     future_date = record_at + timedelta(days=period)
     remainingdays = future_date - today
