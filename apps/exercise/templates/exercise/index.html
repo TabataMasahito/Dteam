@@ -5,9 +5,9 @@
 メニュー
 
 <a class="nav-link" href="{{ url_for('exercise.mode_select') }}">運動プラン設計</a>
-<a class="nav-link" href="{{ url_for('exercise.chat') }}">運動メニュー作成</a>
+<a class="nav-link" href="{{ url_for('exercise.index') }}">運動メニュー作成</a>
 <a class="nav-link" href="{{ url_for('exercise.weight_transition_check') }}">体重の推移確認</a>
 <a class="nav-link" href="{{ url_for('exercise.weight_record') }}">体重の記録</a>
 <a class="nav-link" href="{{ url_for('exercise.confirm_your_goal') }}">目標確認</a>
-<a class="nav-link" href="{{ url_for('exercise.user_edit') }}">ユーザー情報管理</a>
+<a class="nav-link" href="{{ url_for('crud.user_edit') }}">ユーザー情報管理</a>
 {% endblock %}

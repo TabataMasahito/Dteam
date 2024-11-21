@@ -149,12 +149,6 @@ def confirm_your_goal():
         remainingdays=remainingdays.days
     )
 
-# dtアプリケーションを使ってのエンドポイントを作成する
-@dt.route("/useredit")
-@login_required
-def user_edit():
-    return render_template("exercise/user_edit.html")
-
 @dt.route("/api/weight_data")
 def weight_data():
     records = WeightRecord.query.order_by(WeightRecord.record_at).all()
