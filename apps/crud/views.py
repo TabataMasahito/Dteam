@@ -97,3 +97,10 @@ def user_body():
 #        db.session.commit()
 #        return redirect(url_for("crud.users"))
 #    return render_template("crud/edit.html", user=user, form=form)
+
+
+# dtアプリケーションを使ってのエンドポイントを作成する
+@crud.route("/useredit")
+@login_required
+def user_edit():
+    return render_template("crud/user_edit.html")
