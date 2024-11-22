@@ -1,5 +1,5 @@
 <!-- 田辺然大 -->
-{% extends "crud/base.html" %}
+{% extends "exercise/base.html" %}
 {% block title %}ユーザー情報管理{% endblock %}
 {% block content %}
 <a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
@@ -11,28 +11,29 @@
     novalidate="novalidate"
 >
     {{ form.csrf_token }}
+
     <p>
-        {{ form.age.label }} {{ form.age(placeholder="年齢") }}
+        {{ form.age.label }} {{ form.age(placeholder=form.age.data) }}
     </p>
     {% for error in form.age.errors %}
     <span style="color: red;">{{ error }}</span>
     {% endfor %}
 
     <p>
-        {{ form.height.label }} {{ form.height(placeholder="身長") }}
+        {{ form.height.label }} {{ form.height(placeholder=form.height.data) }}
     </p>
     {% for error in form.height.errors %}
     <span style="color: red;">{{ error }}</span>
     {% endfor %}
 
     <p>
-        {{ form.weight.label }} {{ form.weight(placeholder="体重") }}
+        {{ form.weight.label }} {{ form.weight(placeholder=form.weight.data) }}
     </p>
     {% for error in form.weight.errors %}
     <span style="color: red;">{{ error }}</span>
     {% endfor %}
 
     <p><input type="submit" value="更新" /></p>
-
 </form>
+
 {% endblock %}

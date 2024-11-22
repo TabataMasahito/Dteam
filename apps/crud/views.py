@@ -1,7 +1,7 @@
 from apps.crud.forms import UserForm,BodyForm,EditBodyForm
 from apps.crud.models import User
 from apps.app import db
-from flask import Blueprint,render_template,redirect,url_for,session
+from flask import Blueprint,render_template,redirect,url_for,session,request
 
 from flask_login import login_required, current_user
 
@@ -88,6 +88,11 @@ def user_edit(user_id):
     # Userモデルを利用してユーザーを取得する
     user = current_user  # ログイン中のユーザーを取得
 
+    if request.method == "GET":  # GETリクエストの場合、初期値を設定
+        bodyform.age.data = user.age
+        bodyform.height.data = user.height
+        bodyform.weight.data = user.weight
+
     # formからサブミットされた場合はメニュー画面へリダイレクトする
     if bodyform.validate_on_submit():
         user.age = bodyform.age.data
@@ -95,24 +100,12 @@ def user_edit(user_id):
         user.weight = bodyform.weight.data
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for("exercise.index"))
+        return redirect(url_for("crud.update_complete"))
     
     # GETの場合はHTMLを返す
     return render_template("crud/user_edit.html", user=user, form=bodyform)
 
-#@crud.route("/useredit", methods=["GET", "POST"])
-#@login_required
-#def user_edit():
-#    form = BodyForm()
-#
-#    # ログイン中のユーザーを取得
-#    user = current_user  
-#
-#    if form.validate_on_submit():
-#        user.age = form.age.data
-#        user.height = form.height.data
-#        user.weight = form.weight.data
-#        db.session.commit()
-#        return redirect(url_for("crud.users"))
-#
-#    return render_template("crud/user_edit.html", user=user, form=form)
+@crud.route("/updatecomplete")
+@login_required
+def update_complete():
+    return render_template("crud/update_complete.html")
