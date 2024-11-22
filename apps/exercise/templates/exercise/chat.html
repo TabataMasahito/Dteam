@@ -1,0 +1,14 @@
+<form method="POST" action="{{ url_for('exercise.chat') }}">
+    {{ form.csrf_token }}
+    <label for="user_message">メッセージを入力:</label>
+    <textarea id="user_message" name="user_message" rows="4" cols="50" required></textarea>
+    <br>
+    <button type="submit">送信</button>
+</form>
+
+{% if response %}
+    <div class="response">
+        <p><strong>Geminiの返答:</strong></p>
+        <p>{{ response }}</p>
+    </div>
+{% endif %}
