@@ -5,4 +5,34 @@
 <a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
 <h2>ユーザー情報管理</h2>
 
+<form
+    action="{{ url_for('crud.user_edit', user_id=user.id) }}"
+    method="POST"
+    novalidate="novalidate"
+>
+    {{ form.csrf_token }}
+    <p>
+        {{ form.age.label }} {{ form.age(placeholder="年齢") }}
+    </p>
+    {% for error in form.age.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+
+    <p>
+        {{ form.height.label }} {{ form.height(placeholder="身長") }}
+    </p>
+    {% for error in form.height.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+
+    <p>
+        {{ form.weight.label }} {{ form.weight(placeholder="体重") }}
+    </p>
+    {% for error in form.weight.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+
+    <p><input type="submit" value="更新" /></p>
+
+</form>
 {% endblock %}

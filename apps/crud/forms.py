@@ -51,3 +51,29 @@ class BodyForm(FlaskForm):
         )
     
     submit = SubmitField("登録")
+
+class EditBodyForm(FlaskForm):
+    age=IntegerField(
+        "年齢",
+        validators=[
+            DataRequired(message="年齢は必須です。"),
+            NumberRange(1,150,message="正しい数字を入力してください。")
+        ]
+    )
+    height=FloatField(
+        "身長",
+        validators=[
+                DataRequired(message="身長は必須です。"),
+                NumberRange(1,300,message="正しい数字を入力してください。")
+            ]
+        )
+
+    weight=FloatField(
+        "体重",
+        validators=[
+                DataRequired(message="体重は必須です。"),
+                NumberRange(1,150,message="正しい数字を入力してください。")
+            ]
+        )
+    
+    submit = SubmitField("更新")

@@ -1,9 +1,9 @@
-from apps.crud.forms import UserForm,BodyForm
+from apps.crud.forms import UserForm,BodyForm,EditBodyForm
 from apps.crud.models import User
 from apps.app import db
 from flask import Blueprint,render_template,redirect,url_for,session
 
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 
 crud=Blueprint(
@@ -79,28 +79,40 @@ def user_body():
     # エラー時の身体情報入力画面.htmlを表示
     return render_template("crud/身体情報入力画面.html", form=bodyform)
 
+# dtアプリケーションを使ってのエンドポイントを作成する
+@crud.route("/useredit/<user_id>", methods=["GET", "POST"])
+@login_required
+def user_edit(user_id):
+    bodyform = EditBodyForm()
 
-# ユーザーの編集エンドポイント
-#@crud.route("/users/<user_id>", methods=["GET", "POST"])
+    # Userモデルを利用してユーザーを取得する
+    user = current_user  # ログイン中のユーザーを取得
+
+    # formからサブミットされた場合はメニュー画面へリダイレクトする
+    if bodyform.validate_on_submit():
+        user.age = bodyform.age.data
+        user.height = bodyform.height.data
+        user.weight = bodyform.weight.data
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for("exercise.index"))
+    
+    # GETの場合はHTMLを返す
+    return render_template("crud/user_edit.html", user=user, form=bodyform)
+
+#@crud.route("/useredit", methods=["GET", "POST"])
 #@login_required
-#def edit_user(user_id):
+#def user_edit():
 #    form = BodyForm()
-#    user = User.query.filter_by(user_id=id).first()
+#
+#    # ログイン中のユーザーを取得
+#    user = current_user  
+#
 #    if form.validate_on_submit():
-#        id=user_id,
-#        username=username,
-#        password=password,
-#        sex=sex,
 #        user.age = form.age.data
 #        user.height = form.height.data
 #        user.weight = form.weight.data
 #        db.session.commit()
 #        return redirect(url_for("crud.users"))
-#    return render_template("crud/edit.html", user=user, form=form)
-
-
-# dtアプリケーションを使ってのエンドポイントを作成する
-@crud.route("/useredit")
-@login_required
-def user_edit():
-    return render_template("crud/user_edit.html")
+#
+#    return render_template("crud/user_edit.html", user=user, form=form)
