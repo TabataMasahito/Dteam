@@ -150,9 +150,17 @@ def confirm_your_goal():
     )
 
 @dt.route("/api/weight_data")
+@login_required  # ログインしていないとアクセスできないようにする
 def weight_data():
-    records = WeightRecord.query.order_by(WeightRecord.record_at).all()
-    data = [{"date": record.record_at.strftime("%Y-%m-%d"), "weight": record.recordweight} for record in records]
+    # ログイン中のユーザーのIDでフィルタリング
+    records = WeightRecord.query.filter_by(user_id=current_user.id).order_by(WeightRecord.record_at).all()
+   
+    # データを整形
+    data = [
+        {"date": record.record_at.strftime("%Y-%m-%d"), "weight": record.recordweight}
+        for record in records
+    ]
+   
     return jsonify(data)
 
 # dtアプリケーションを使ってweighttransitioncheckのエンドポイントを作成する
