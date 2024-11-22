@@ -6,6 +6,7 @@ from apps.app import db
 from flask_login import login_user,logout_user,login_required,current_user
 from datetime import datetime,timedelta,date
 from sqlalchemy import desc
+import requests
 
 # template_folderを指定する（staticは指定しない）
 dt = Blueprint("exercise", __name__, template_folder="templates")
@@ -167,3 +168,39 @@ def weight_data():
 @dt.route("/weighttransitioncheck")
 def weight_transition_check():
     return render_template("exercise/weight_transition_check.html")
+
+# Google Gemini APIの設定
+GEMINI_API_URL = "https://gemini.googleapis.com/v1/chat"
+API_KEY = "AIzaSyC9w96m29A8vEYiKiFS6U_g3ZuXBXCKoak"  # ここにAPIキーを記入
+
+@dt.route("/response")
+def response():
+    return render_template("exercise/response.html")
+
+@dt.route("/chat", methods=["POST"])
+def chat():
+    user_message = request.json.get("message")
+    if not user_message:
+        return jsonify({"error": "Message is required"}), 400
+
+    # Google Gemini APIへのリクエスト
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json",
+    }
+    payload = {
+        "prompt": user_message,
+        "temperature": 0.7,
+        "max_tokens": 150,
+    }
+
+    response = requests.post(GEMINI_API_URL, headers=headers, json=payload)
+
+    if response.status_code == 200:
+        ai_response = response.json().get("choices", [{}])[0].get("text", "No response")
+        return jsonify({"response": ai_response})
+    else:
+        return jsonify({"error": "Failed to get response from Gemini API"}), response.status_code
+
+if __name__ == "__main__":
+    dt.run(debug=True)

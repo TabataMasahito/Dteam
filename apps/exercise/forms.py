@@ -44,4 +44,7 @@ class WeightRecordForm(FlaskForm):
             ]
         )
     submit = SubmitField('登録')
-
+    
+class ChatForm(FlaskForm):
+    message = StringField('Message', validators=[DataRequired()])
+    submit = SubmitField('Send')
