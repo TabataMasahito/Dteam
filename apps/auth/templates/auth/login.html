@@ -1,5 +1,5 @@
 <!--田辺然大-->
-{% extends "exercise/base.html" %}
+{% extends "auth/base.html" %}
 {% block title %}ログイン{% endblock %}
 {% block content %}
 <div class="mx-auto dt-auth-main">
@@ -25,6 +25,10 @@
 
     {{ form.submit(class="btn btn-md btn-primary btn-block dt-auth-btn") }}
 </form>
+<li class="nav-item">
+    <a class="nav-link" href="{{ url_for('auth.signup') }}">
+        新規登録</a>
+</li>
 </section>
 </div>
 </div>
