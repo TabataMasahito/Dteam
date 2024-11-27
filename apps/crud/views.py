@@ -112,24 +112,6 @@ def user_edit(user_id):
 def update_complete():
     return render_template("crud/update_complete.html")
 
-#@crud.route("/confirmdeletion")
-#@login_required
-#def confirm_deletion():
-#    return render_template("crud/confirm_deletion.html")
-
-#@crud.route("/deleteuser", methods=["POST", "GET"])
-#@login_required
-#def delete_current_user():
-#    form = DeleteForm()  # 削除確認用フォーム
-#    if form.validate_on_submit():  # POSTリクエストでフォームが送信された場合
-#            # 関連データとユーザー自体を削除
-#            db.session.query(ExercisePlan).filter_by(user_id=current_user.id).delete()
-#            db.session.query(WeightRecord).filter_by(user_id=current_user.id).delete()
-#            db.session.query(User).filter_by(id=current_user.id).delete()
-#            db.session.commit()
-#            return redirect(url_for("auth.signup"))  # 削除後にサインアップ画面へリダイレクト
-#    return render_template("crud/confirm_deletion.html", form=form)
-
 @crud.route("/deleteuser/<user_id>/delete", methods=["POST"])
 @login_required
 def delete_user(user_id):
