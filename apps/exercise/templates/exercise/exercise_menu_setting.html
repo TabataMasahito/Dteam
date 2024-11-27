@@ -1,0 +1,38 @@
+<!-- 田端将人 -->
+{% extends "exercise/base.html" %}
+{% block title %}運動モード選択{% endblock %}
+{% block content %}
+<a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+        <header>運動メニュー作成</header>
+        <section>
+            <form action="{{ url_for('exercise.exercise_menu_setting') }}" method="POST" novalidate="novalidate">
+                {{ form.csrf_token }}
+                <p>運動器具の有無</p>
+                <p>
+                {{ form.exerciseitem(class="form-control dt-auth-input") }}
+                </p>
+                {% for error in form.exerciseitem.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+
+                <p>運動の強度</p>
+                <p>
+                    {{ form.strength(class="form-control dt-auth-input") }}
+                </p>
+                {% for error in form.strength.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+
+                <p>運動時間</p>
+                <p>
+                    {{ form.minutes(class="form-control dt-auth-input") }}分
+                </p>
+                {% for error in form.minutes.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+                
+                <p>{{ form.submit(class="btn btn-md btn-primary btn-block dt-auth-btn") }}</p>
+            </form>
+        </section>
+
+{% endblock %}
