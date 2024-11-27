@@ -1,4 +1,4 @@
-from apps.crud.forms import UserForm,BodyForm,EditBodyForm
+from apps.crud.forms import UserForm,BodyForm,EditBodyForm,DeleteForm
 from apps.crud.models import User
 from apps.exercise.models import ExercisePlan,WeightRecord
 
@@ -112,21 +112,20 @@ def user_edit(user_id):
 def update_complete():
     return render_template("crud/update_complete.html")
 
-@crud.route("/confirmdeletion")
+@crud.route("/deleteuser/<user_id>/delete", methods=["POST"])
 @login_required
-def confirm_deletion():
-    return render_template("crud/confirm_deletion.html")
+def delete_user(user_id):
+    form = DeleteForm()
+    if form.validate_on_submit():
+        user = current_user
+        # 外部キー制約を無視して関連レコードを削除する（依存レコードも削除する）
+        db.session.query(WeightRecord).filter(WeightRecord.user_id==user.id).delete()
+        db.session.query(ExercisePlan).filter(ExercisePlan.user_id==user.id).delete()
 
-@crud.route("/deleteuser", methods=["POST"])
-@login_required
-def delete_user():
-    # Userモデルを利用してユーザーを取得する
-    user = current_user  # ログイン中のユーザーを取得
+        # Userテーブルの該当ユーザーを削除
+        db.session.query(User).filter(User.id==user.id).delete()
 
-    db.session.query(User).filter_by(id=current_user.id).delete
-    db.session.query(ExercisePlan).filter_by(user_id=current_user.id).delete
-    db.session.query(WeightRecord).filter_by(user_id=current_user.id).delete
-
-
-    db.session.commit()
-    return redirect(url_for("auth.signup"))
+        # 変更をコミット
+        db.session.commit()
+        return redirect(url_for("auth.signup"))
+    return render_template("crud/confirm_deletion.html", form=form, user=user)

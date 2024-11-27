@@ -21,13 +21,3 @@ class ExercisePlan(db.Model):
     goalweight = db.Column(db.Float)
     numberexercisesweek = db.Column(db.Integer)
     record_at = db.Column(db.Date, default=datetime.now().date)  
-
-class ChatHistory(db.Model):
-    __tablename__ = "chathistory"
-    # カラムを定義する
-    id = db.Column(db.String, primary_key=True)
-    user_id = db.Column(db.String, db.ForeignKey("acount.id"))
-    username = db.Column(db.String, index=True)
-    message = db.Column(db.Text)
-    response = db.Column(db.Text)
-    timestamp = db.Column(db.Date, default=datetime.now().date)
