@@ -77,3 +77,7 @@ class EditBodyForm(FlaskForm):
         )
     
     submit = SubmitField("更新")
+
+
+class DeleteForm(FlaskForm):
+    submit = SubmitField("削除")
