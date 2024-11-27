@@ -1,0 +1,7 @@
+{% extends "exercise/base.html" %}
+{% block title %}体重記録{% endblock %}
+{% block content %}
+<p>最新の体重が記録されていないためこの機能を利用できません。</p>
+<p>「体重の記録」から今日の体重の入力を行ってください。</p>
+<a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+{% endblock %}

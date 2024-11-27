@@ -1,5 +1,4 @@
 #田辺然大
-from werkzeug.security import generate_password_hash
 from apps.app import db, login_manager
 from flask_login import UserMixin
 from datetime import datetime  # 修正箇所を含む必要モジュール

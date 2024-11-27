@@ -1,0 +1,7 @@
+{% extends "exercise/base.html" %}
+{% block title %}体重記録{% endblock %}
+{% block content %}
+<p>現在別のプランが登録されています。</p>
+<p>このプランが終了するまで変更や新しく開始することはできません。</p>
+<a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+{% endblock %}
