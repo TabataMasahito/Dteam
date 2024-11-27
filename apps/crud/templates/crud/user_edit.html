@@ -36,4 +36,11 @@
     <p><input type="submit" value="更新" /></p>
 </form>
 
+<form
+    action="{{ url_for('crud.confirm_deletion') }}"
+>
+    {{ form.csrf_token }}
+        <input type="submit" value="削除">
+</form>
+
 {% endblock %}

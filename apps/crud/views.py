@@ -1,5 +1,7 @@
 from apps.crud.forms import UserForm,BodyForm,EditBodyForm
 from apps.crud.models import User
+from apps.exercise.models import ExercisePlan,WeightRecord
+
 from apps.app import db
 from flask import Blueprint,render_template,redirect,url_for,session,request
 
@@ -109,3 +111,22 @@ def user_edit(user_id):
 @login_required
 def update_complete():
     return render_template("crud/update_complete.html")
+
+@crud.route("/confirmdeletion")
+@login_required
+def confirm_deletion():
+    return render_template("crud/confirm_deletion.html")
+
+@crud.route("/deleteuser", methods=["POST"])
+@login_required
+def delete_user():
+    # Userモデルを利用してユーザーを取得する
+    user = current_user  # ログイン中のユーザーを取得
+
+    db.session.query(User).filter_by(id=current_user.id).delete
+    db.session.query(ExercisePlan).filter_by(user_id=current_user.id).delete
+    db.session.query(WeightRecord).filter_by(user_id=current_user.id).delete
+
+
+    db.session.commit()
+    return redirect(url_for("auth.signup"))

@@ -1,0 +1,15 @@
+{% extends "exercise/base.html" %}
+{% block title %}削除確認{% endblock %}
+{% block content %}
+<a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+<h2>削除確認</h2>
+
+<form
+    action="{{ url_for('crud.delete_user')}}"
+    method="POST"
+>
+    {{ form.csrf_token }}
+    <input type="submit" value="削除">
+</form>
+<a class="nav-link" href="{{ url_for('crud.user_edit', user_id=current_user.id) }}">ユーザー情報更新へ戻る</a>
+{% endblock %}
