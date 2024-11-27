@@ -13,21 +13,21 @@
     {{ form.csrf_token }}
 
     <p>
-        {{ form.age.label }} {{ form.age(placeholder=form.age.data) }}
+        {{ form.age.label }} {{ form.age(placeholder=form.age.data) }}歳
     </p>
     {% for error in form.age.errors %}
     <span style="color: red;">{{ error }}</span>
     {% endfor %}
 
     <p>
-        {{ form.height.label }} {{ form.height(placeholder=form.height.data) }}
+        {{ form.height.label }} {{ form.height(placeholder=form.height.data) }}cm
     </p>
     {% for error in form.height.errors %}
     <span style="color: red;">{{ error }}</span>
     {% endfor %}
 
     <p>
-        {{ form.weight.label }} {{ form.weight(placeholder=form.weight.data) }}
+        {{ form.weight.label }} {{ form.weight(placeholder=form.weight.data) }}kg
     </p>
     {% for error in form.weight.errors %}
     <span style="color: red;">{{ error }}</span>
