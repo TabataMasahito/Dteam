@@ -1,32 +1,62 @@
-<!--田端将人-->
-{% extends "exercise/base.html" %}
+{% extends "auth/base.html" %}
 {% block title %}身体情報登録{% endblock %}
 {% block content %}
-<div class="mx-auto dt-auth-main">
-    <div class="card dt-auth-signup">
-        <header>身体情報登録</header>
-        <section><form action="{{ url_for('auth.bodycreate', next=request.args.get('next')) }}" method="POST" novalidate="novalidate"class="form-signin">
-    {% for message in get_flashed_messages() %}
-    <div class="dt-auth-flash">{{ message }}</div>
-    {% endfor %}
-    {{ form.csrf_token }}
-    <p>
-    {{ form.age(class="form-control dt-auth-input",placeholder="年齢") }}歳</p>
-    {% for error in form.age.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
-    <p>{{ form.sex(class="form-control dt-auth-input",placeholder="性別") }}</p>
-    {% for error in form.sex.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
-    <p>{{ form.height(class="form-control dt-auth-input",placeholder="身長") }}cm</p>
-    {% for error in form.height.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
-    <p>{{ form.weight(class="form-control dt-auth-input",placeholder="体重") }}kg</p>
-    {% for error in form.weight.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
-    <p>{{ form.submit(class="btn btn-md btn-primary btn-block dt-auth-btn") }}</p>
-</form>
+<div class="container my-5">
+    <div class="card mx-auto shadow-sm" style="max-width: 500px;">
+        <header class="card-header text-center bg-primary text-white">
+            <h4>身体情報登録</h4>
+        </header>
+        <div class="card-body">
+            <form action="{{ url_for('auth.bodycreate', next=request.args.get('next')) }}" method="POST" novalidate="novalidate" class="form-signin">
+                {{ form.csrf_token }}
+
+                {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning text-center">
+                    {{ message }}
+                </div>
+                {% endfor %}
+
+                <div class="mb-3">
+                    <label for="age" class="form-label">年齢</label>
+                    {{ form.age(class="form-control", placeholder="年齢") }}
+                    <small class="text-muted">例: 25</small>
+                    {% for error in form.age.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="sex" class="form-label">性別</label>
+                    {{ form.sex(class="form-control", placeholder="性別") }}
+                    <small class="text-muted">例: 男性 または 女性</small>
+                    {% for error in form.sex.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="height" class="form-label">身長</label>
+                    {{ form.height(class="form-control", placeholder="身長") }}
+                    <small class="text-muted">単位: cm</small>
+                    {% for error in form.height.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="weight" class="form-label">体重</label>
+                    {{ form.weight(class="form-control", placeholder="体重") }}
+                    <small class="text-muted">単位: kg</small>
+                    {% for error in form.weight.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="d-grid">
+                    {{ form.submit(class="btn btn-primary btn-block") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

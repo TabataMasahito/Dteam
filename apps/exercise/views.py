@@ -15,8 +15,7 @@ dt = Blueprint("exercise", __name__, template_folder="templates")
 def index():
     return render_template("exercise/index.html")
 
-
-
+#プラン設計機能_モード選択
 # dtアプリケーションを使ってmodeselectのエンドポイントを作成する
 @dt.route("/modeselect", methods=["GET", "POST"])
 @login_required
@@ -62,8 +61,7 @@ def mode_select():
     return render_template("exercise/modeselect.html", form=form)
 
 
-
-# dtアプリケーションを使ってgoalsettingのエンドポイントを作成する
+#プラン設計機能_目標設定
 @dt.route("/goalsetting", methods=["GET", "POST"])
 @login_required
 def goal_setting():
@@ -89,7 +87,8 @@ def goal_setting():
     
     return render_template("exercise/goal_setting.html", form=form)
 
-# dtアプリケーションを使ってplansettingconpleteのエンドポイントを作成する
+
+#プラン設計機能_設定完了
 @dt.route("/plansettingconplete")
 @login_required
 def paln_setting_complete():
@@ -97,7 +96,7 @@ def paln_setting_complete():
 
 
 
-# dtアプリケーションを使ってweightrecordのエンドポイントを作成する
+# 体重記録機能
 @dt.route("/weightrecord", methods=["GET", "POST"])
 @login_required
 def weight_record():
@@ -130,13 +129,17 @@ def weight_record():
 
     return render_template("exercise/weight_record.html", form=form)
 
-# dtアプリケーションを使ってweightrecordconpleteのエンドポイントを作成する
+
+
+#体重記録機能_記録完了
 @dt.route("/weightrecordconplete")
 @login_required
 def weight_record_complete():
     return render_template("exercise/weight_record_complete.html")
 
-# dtアプリケーションを使ってconfirmyourgoalのエンドポイントを作成する
+
+
+# 目標確認機能
 @dt.route("/confirmyourgoal")
 @login_required
 def confirm_your_goal():
@@ -201,6 +204,8 @@ def confirm_your_goal():
 
     )
 
+
+# 体重グラフ化機能
 @dt.route("/api/weight_data")
 @login_required  # ログインしていないとアクセスできないようにする
 def weight_data():
@@ -214,8 +219,6 @@ def weight_data():
     ]
 
     return jsonify(data)
-
-# dtアプリケーションを使ってweighttransitioncheckのエンドポイントを作成する
 @dt.route("/weighttransitioncheck")
 @login_required  # ログインしていないとアクセスできないようにする
 def weight_transition_check():
@@ -228,10 +231,49 @@ def weight_transition_check():
     # レコードがある場合は通常ページを表示
     return render_template("exercise/weight_transition_check.html", records=user_records)
 
+
+
+# 運動メニュー提案機能_設定
 @dt.route("/exercise_menu_setting", methods=["GET", "POST"])
 @login_required  # ログインしていないとアクセスできないようにする
 def exercise_menu_setting():
     user_id=current_user.id
+    today = date.today()
+    exercise_records = WeightRecord.query.filter_by(user_id=user_id).all()
+    if not exercise_records:
+        # レコードがない場合はエラーページにリダイレクト
+        return render_template("exercise/exercise_error.html")
+    user_record_exists = ExercisePlan.query.filter_by(user_id=user_id).order_by(desc(ExercisePlan.record_at)).first()
+    if user_record_exists: 
+
+        # 残り日数を計算
+        record_at = (
+            ExercisePlan.query.filter_by(user_id=user_id)
+            .order_by(desc(ExercisePlan.record_at))
+            .first()
+        )
+        if record_at:
+            record_at = record_at.record_at  
+            if isinstance(record_at, str):
+                record_at = datetime.strptime(record_at, "%Y-%m-%d").date()
+
+        Period = (
+            ExercisePlan.query.filter_by(user_id=user_id)
+            .order_by(desc(ExercisePlan.period))
+            .first()
+        )
+        Period = int(Period.period) 
+
+        
+        future_date = record_at + timedelta(days=Period)
+        remainingdays = future_date - today
+
+        # まだ過去に設定したプランの日数が残っている場合はエラー画面へ
+        if remainingdays.days <= 0 :
+            return render_template("exercise/exercise_error.html")
+
+
+
     user_records = WeightRecord.query.filter_by(user_id=user_id).all()
     if not user_records:
         # レコードがない場合はエラーページにリダイレクト
@@ -252,8 +294,7 @@ def exercise_menu_setting():
 
 
 
-
-# AIの回答を表示するページ
+# 運動メニュー提案機能
 @dt.route('/exercise_menu')
 @login_required  # ログインしていないとアクセスできないようにする
 def exercise_menu():

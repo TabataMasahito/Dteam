@@ -1,13 +1,28 @@
-<!-- 池田大和 -->
 {% extends "exercise/base.html" %}
 {% block content %}
-<div class="alert alert-primary"></div>
-メニュー
-
-<a class="nav-link" href="{{ url_for('exercise.mode_select') }}">運動プラン設計</a>
-<a class="nav-link" href="{{ url_for('exercise.exercise_menu_setting') }}">運動メニュー作成</a>
-<a class="nav-link" href="{{ url_for('exercise.weight_transition_check') }}">体重の推移確認</a>
-<a class="nav-link" href="{{ url_for('exercise.weight_record') }}">体重の記録</a>
-<a class="nav-link" href="{{ url_for('exercise.confirm_your_goal') }}">目標確認</a>
-<a class="nav-link" href="{{ url_for('crud.user_edit', user_id=current_user.id) }}">ユーザー情報管理</a>
+<div class="container my-5">
+    <div class="alert alert-primary text-center">
+        <strong>メニュー</strong>
+    </div>
+    <div class="menu-container">
+        <a class="btn btn-outline-primary" href="{{ url_for('exercise.mode_select') }}">
+            運動プラン設計
+        </a>
+        <a class="btn btn-outline-primary" href="{{ url_for('exercise.exercise_menu_setting') }}">
+            運動メニュー作成
+        </a>
+        <a class="btn btn-outline-primary" href="{{ url_for('exercise.weight_transition_check') }}">
+            体重の推移確認
+        </a>
+        <a class="btn btn-outline-primary" href="{{ url_for('exercise.weight_record') }}">
+            体重の記録
+        </a>
+        <a class="btn btn-outline-primary" href="{{ url_for('exercise.confirm_your_goal') }}">
+            目標確認
+        </a>
+        <a class="btn btn-outline-primary" href="{{ url_for('crud.user_edit', user_id=current_user.id) }}">
+            ユーザー情報管理
+        </a>
+    </div>
+</div>
 {% endblock %}

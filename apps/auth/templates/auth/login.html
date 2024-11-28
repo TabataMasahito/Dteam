@@ -1,32 +1,44 @@
-<!--田辺然大-->
 {% extends "auth/base.html" %}
 {% block title %}ログイン{% endblock %}
 {% block content %}
-<div class="mx-auto dt-auth-main">
-    <div class="card dt-auth-login">
-        <header>ログイン</header>
-        <section>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card dt-auth-login shadow-sm" style="width: 100%; max-width: 400px;">
+        <header class="text-center py-3 bg-primary text-white">
+            <h3>ログイン</h3>
+        </header>
+        <section class="p-4">
             <form action="{{ url_for('auth.login') }}" method="POST" novalidate="novalidate">
-    {% for message in get_flashed_messages() %}
-    <span class="dt-auth-flash">{{ message }}</span>
-    {% endfor %} {{ form.csrf_token }}
-
-
-    <p>{{ form.userid(class="form-control dt-auth-input",placeholder="ユーザーID") }}</p>
-    {% for error in form.userid.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
-
-
-    <p>{{ form.password(class="form-control dt-auth-input",placeholder="パスワード") }}</p>
-    {% for error in form.password.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
-
-    {{ form.submit(class="btn btn-md btn-primary btn-block dt-auth-btn") }}
-</form>
-<a class="nav-link" href="{{ url_for('auth.signup') }}">新規登録</a>
-</section>
-</div>
+                {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning text-center">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {{ form.csrf_token }}
+                
+                <div class="mb-3">
+                    <label for="userid" class="form-label">ユーザーID</label>
+                    {{ form.userid(class="form-control dt-auth-input", placeholder="ユーザーID") }}
+                    {% for error in form.userid.errors %}
+                    <span class="text-danger small">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                
+                <div class="mb-3">
+                    <label for="password" class="form-label">パスワード</label>
+                    {{ form.password(class="form-control dt-auth-input", placeholder="パスワード") }}
+                    {% for error in form.password.errors %}
+                    <span class="text-danger small">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                
+                <div class="d-grid">
+                    {{ form.submit(class="btn btn-primary btn-block dt-auth-btn") }}
+                </div>
+            </form>
+            <div class="text-center mt-3">
+                <a class="nav-link text-blue"href="{{ url_for('auth.signup') }}">新規登録</a>
+            </div>
+        </section>
+    </div>
 </div>
 {% endblock %}
