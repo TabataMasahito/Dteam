@@ -12,6 +12,24 @@
 >
     {{ form.csrf_token }}
 
+    <!-- IDの表示 -->
+    <p>
+        <label>ID: </label>
+        <span>{{ user.id }}</span>
+    </p>
+
+    <!-- ユーザー名の表示 -->
+    <p>
+        <label>ユーザー名: </label>
+        <span>{{ user.username }}</span>
+    </p>
+
+    <!-- アカウント作成時の体重を表示 -->
+    <p>
+        <label>アカウント作成時の体重: </label>
+        <span>{{ user.weight }}kg</span>
+    </p>
+
     <p>
         {{ form.age.label }} {{ form.age(placeholder=form.age.data) }}歳
     </p>
@@ -26,23 +44,8 @@
     <span style="color: red;">{{ error }}</span>
     {% endfor %}
 
-    <p>
-        {{ form.weight.label }} {{ form.weight(placeholder=form.weight.data) }}kg
-    </p>
-    {% for error in form.weight.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
-
     <p><input type="submit" value="更新" /></p>
 </form>
-
-<!-- <form
-    action="{{ url_for('crud.delete_user', user_id=current_user.id) }}"
-    method="POST"
->
-    {{ form.csrf_token }}
-        <input type="submit" value="削除">
-</form> -->
 
 <form action="{{ url_for('crud.delete_user', user_id=current_user.id) }}" method="POST" onsubmit="return confirmDeletion()">
     {{ form.csrf_token }}

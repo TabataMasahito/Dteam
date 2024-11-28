@@ -143,15 +143,17 @@ def weight_record_complete():
 @dt.route("/confirmyourgoal")
 @login_required
 def confirm_your_goal():
-
-    user_id = current_user.id
+    user_id=current_user.id
+    today = date.today()
+    exercise_records = ExercisePlan.query.filter_by(user_id=user_id).all()
+    if not exercise_records:
+        # レコードがない場合はエラーページにリダイレクト
+        return render_template("exercise/exercise_error.html")
     user_records = WeightRecord.query.filter_by(user_id=user_id).all()
     # 最新の体重が記録されているかチェック
     if not user_records:
         # レコードがない場合はエラーページにリダイレクト
         return render_template("exercise/weight_recode_error.html")
-    today = date.today()
-
     record_at = (
         ExercisePlan.query.filter_by(user_id=user_id)
         .order_by(desc(ExercisePlan.record_at))
