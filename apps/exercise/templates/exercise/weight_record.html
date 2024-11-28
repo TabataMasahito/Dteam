@@ -2,7 +2,7 @@
 {% extends "exercise/base.html" %}
 {% block title %}体重記録{% endblock %}
 {% block content %}
-<a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+<a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
 <h2>体重記録</h2>
 <form action="{{ url_for('exercise.weight_record') }}" method="POST" novalidate="novalidate">
     {{ form.csrf_token }}

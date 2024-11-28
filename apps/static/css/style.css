@@ -39,3 +39,26 @@
     padding: 20px;  /* 内側に余白を追加 */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* 軽い影を追加 */
 }
+
+/* nav-link クラスのスタイル */
+.menu-btn {
+    display: inline-block; /* ブロック要素にしてクリック範囲を広げる */
+    padding: 10px 15px;    /* 内側の余白を設定 */
+    color: #ffffff;        /* テキストの色 */
+    background-color: #007bff; /* 背景色 */
+    text-decoration: none; /* 下線を削除 */
+    border-radius: 5px;    /* 角を丸める */
+    font-size: 16px;       /* テキストサイズ */
+    font-weight: bold;     /* テキストを太字にする */
+    transition: background-color 0.3s, color 0.3s; /* ホバー時のアニメーション */
+}
+
+/* ホバー時のスタイル */
+.menu-btn:hover {
+    background-color: #0056b3; /* 背景色を少し暗くする */
+    color: #f8f9fa;           /* テキストの色を変更 */
+}
+
+.navbar-brand {
+    margin-left: 170px;
+}
