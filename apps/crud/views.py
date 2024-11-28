@@ -93,13 +93,11 @@ def user_edit(user_id):
     if request.method == "GET":  # GETリクエストの場合、初期値を設定
         bodyform.age.data = user.age
         bodyform.height.data = user.height
-        bodyform.weight.data = user.weight
 
     # formからサブミットされた場合はメニュー画面へリダイレクトする
     if bodyform.validate_on_submit():
         user.age = bodyform.age.data
         user.height = bodyform.height.data
-        user.weight = bodyform.weight.data
         db.session.add(user)
         db.session.commit()
         return redirect(url_for("crud.update_complete"))
