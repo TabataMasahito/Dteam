@@ -30,7 +30,7 @@ class CreateBody(FlaskForm):
             NumberRange(1,150,message="正しい数字を入力してください。")
         ]
     )
-    sex=SelectField(
+    sex=RadioField(
         "性別",choices=[('男', '男性'), ('女', '女性')],
         validators=[
             DataRequired('性別を選択してください。')]

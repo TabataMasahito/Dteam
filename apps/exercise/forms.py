@@ -61,6 +61,7 @@ class ExerciseForm(FlaskForm):
     minutes=IntegerField(
         "運動時間",
         validators=[
-            DataRequired(message="この項目は必須です")
+            DataRequired(message="この項目は必須です"),
+            NumberRange(1,120,message="メニューは２時間までしか作成できません")
         ])
     submit = SubmitField('作成')

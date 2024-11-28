@@ -1,38 +1,61 @@
-<!-- 田端将人 -->
 {% extends "exercise/base.html" %}
 {% block title %}運動モード選択{% endblock %}
 {% block content %}
-<a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
-        <header>運動メニュー作成</header>
-        <section>
-            <form action="{{ url_for('exercise.exercise_menu_setting') }}" method="POST" novalidate="novalidate">
-                {{ form.csrf_token }}
-                <p>運動器具の有無</p>
-                <p>
-                {{ form.exerciseitem(class="form-control dt-auth-input") }}
-                </p>
+<div class="container my-5">
+    <a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+    <header class="text-center mb-4">
+        <h3>運動メニュー作成</h3>
+    </header>
+    <section>
+        <form action="{{ url_for('exercise.exercise_menu_setting') }}" method="POST" novalidate="novalidate">
+            {{ form.csrf_token }}
+
+            <div class="mb-3">
+                <label class="form-label">運動器具の有無</label>
+                <div class="form-check">
+                    {% for choice in form.exerciseitem %}
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                {{ choice() }} {{ choice.label.text }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
                 {% for error in form.exerciseitem.errors %}
-                <span style="color: red;">{{ error }}</span>
+                    <div class="text-danger small">{{ error }}</div>
                 {% endfor %}
+            </div>
 
-                <p>運動の強度</p>
-                <p>
-                    {{ form.strength(class="form-control dt-auth-input") }}
-                </p>
+            <div class="mb-3">
+                <label class="form-label">運動の強度</label>
+                <div class="form-check">
+                    {% for choice in form.strength %}
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                {{ choice() }} {{ choice.label.text }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
                 {% for error in form.strength.errors %}
-                <span style="color: red;">{{ error }}</span>
+                    <div class="text-danger small">{{ error }}</div>
                 {% endfor %}
+            </div>
 
-                <p>運動時間</p>
-                <p>
-                    {{ form.minutes(class="form-control dt-auth-input") }}分
-                </p>
+            <div class="mb-3">
+                <label class="form-label">運動時間</label>
+                <div>
+                    {{ form.minutes(id="form-minutes", class="form-control") }} 分
+                </div>
                 {% for error in form.minutes.errors %}
-                <span style="color: red;">{{ error }}</span>
+                    <div class="text-danger small">{{ error }}</div>
                 {% endfor %}
-                
-                <p>{{ form.submit(class="btn btn-md btn-primary btn-block dt-auth-btn") }}</p>
-            </form>
-        </section>
+            </div>
 
+            <div class="d-grid">
+                {{ form.submit(class="btn btn-primary btn-block") }}
+            </div>
+        </form>
+    </section>
+</div>
 {% endblock %}

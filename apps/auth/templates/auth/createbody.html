@@ -26,9 +26,15 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="sex" class="form-label">性別</label>
-                    {{ form.sex(class="form-control", placeholder="性別") }}
-                    <small class="text-muted">例: 男性 または 女性</small>
+                    <label class="form-label">性別</label>
+                    <div class="d-flex gap-3">
+                        {% for subfield in form.sex %}
+                        <div class="form-check">
+                            {{ subfield(class="form-check-input") }}
+                            <label class="form-check-label">{{ subfield.label.text }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
                     {% for error in form.sex.errors %}
                     <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
