@@ -6,7 +6,36 @@
 }
 
 .menu-container a {
-    width: 170px; /* ボタンの幅 */
+    width: 300px; /* ボタンの幅 */
+    height: 150px;
     padding: 1rem; /* ボタン内の余白 */
     text-align: center; /* テキストを中央寄せ */
+    font-size: larger;
+}
+
+/* ボタンのスタイル */
+.btn {
+    display: inline-block;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    color: #007bff;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    background-color: #ffffff;
+}
+
+#response-container {
+    margin: 0 auto;  /* 左右中央 */
+    text-align: center;  /* テキスト中央揃え */
+    max-width: 80%;  /* 最大幅を指定（必要に応じて調整） */
+    white-space: pre-wrap;  /* 改行を適切に表示 */
+    margin-bottom: 50px;
+    background-color: #f8f9fa;  /* 明るい背景色 */
+    border: 2px solid #007bff;  /* 青い枠線 */
+    border-radius: 10px;  /* 角を丸くする */
+    padding: 20px;  /* 内側に余白を追加 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* 軽い影を追加 */
 }

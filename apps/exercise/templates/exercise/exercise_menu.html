@@ -1,28 +1,27 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>運動メニュー</title>
-</head>
+{% extends "exercise/base.html" %}
+{% block title %}運動モード選択{% endblock %}
+{% block content %}
 <a class="nav-link" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
 <body>
     <h2>{{ username }}さんの運動メニュー</h2>
-
+ 
     <p><strong>提案されたメニュー:</strong></p>
-    <pre id="response-container">{{ response }}</pre>
-
+ 
+    <div class="d-flex justify-content-center">
+        <pre id="response-container">{{ response }}</pre>
+    </div>
+ 
     <script>
         // サーバーから渡されるエスケープ済みの文字列を取得
         const responseContainer = document.getElementById('response-container');
         const originalText = responseContainer.textContent;
-
+ 
         // "**" を改行に置き換え
         let updatedText = originalText.replace(/\*\*/g, '\n');
-
+ 
         // "*" と ":" の間の文字を太字にする
         updatedText = updatedText.replace(/\*(.*?)\*:/g, '<strong>$1</strong>:');
-
+ 
         responseContainer.innerHTML = updatedText;
     </script>
-</body>
-</html>
+{% endblock %}
