@@ -238,6 +238,42 @@ def weight_transition_check():
 @login_required  # ログインしていないとアクセスできないようにする
 def exercise_menu_setting():
     user_id=current_user.id
+    today = date.today()
+    exercise_records = WeightRecord.query.filter_by(user_id=user_id).all()
+    if not exercise_records:
+        # レコードがない場合はエラーページにリダイレクト
+        return render_template("exercise/exercise_error.html")
+    user_record_exists = ExercisePlan.query.filter_by(user_id=user_id).order_by(desc(ExercisePlan.record_at)).first()
+    if user_record_exists: 
+
+        # 残り日数を計算
+        record_at = (
+            ExercisePlan.query.filter_by(user_id=user_id)
+            .order_by(desc(ExercisePlan.record_at))
+            .first()
+        )
+        if record_at:
+            record_at = record_at.record_at  
+            if isinstance(record_at, str):
+                record_at = datetime.strptime(record_at, "%Y-%m-%d").date()
+
+        Period = (
+            ExercisePlan.query.filter_by(user_id=user_id)
+            .order_by(desc(ExercisePlan.period))
+            .first()
+        )
+        Period = int(Period.period) 
+
+        
+        future_date = record_at + timedelta(days=Period)
+        remainingdays = future_date - today
+
+        # まだ過去に設定したプランの日数が残っている場合はエラー画面へ
+        if remainingdays.days <= 0 :
+            return render_template("exercise/exercise_error.html")
+
+
+
     user_records = WeightRecord.query.filter_by(user_id=user_id).all()
     if not user_records:
         # レコードがない場合はエラーページにリダイレクト
