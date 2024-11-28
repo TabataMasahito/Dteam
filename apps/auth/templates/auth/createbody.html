@@ -43,7 +43,7 @@
                 <div class="mb-3">
                     <label for="height" class="form-label">身長</label>
                     {{ form.height(class="form-control", placeholder="身長") }}
-                    <small class="text-muted">単位: cm</small>
+                    <small class="text-muted">単位: cm（小数も利用できます）</small>
                     {% for error in form.height.errors %}
                     <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
@@ -52,7 +52,7 @@
                 <div class="mb-3">
                     <label for="weight" class="form-label">体重</label>
                     {{ form.weight(class="form-control", placeholder="体重") }}
-                    <small class="text-muted">単位: kg</small>
+                    <small class="text-muted">単位: kg（小数も利用できます）</small>
                     {% for error in form.weight.errors %}
                     <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
