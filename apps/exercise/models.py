@@ -21,3 +21,11 @@ class ExercisePlan(db.Model):
     goalweight = db.Column(db.Float)
     numberexercisesweek = db.Column(db.Integer)
     record_at = db.Column(db.Date, default=datetime.now().date)  
+
+class ExerciseHistory(db.Model):
+    __tablename__ = "execsehistory"
+    # カラムを定義する
+    id = db.Column(db.String, primary_key=True)
+    user_id = db.Column(db.String, db.ForeignKey("acount.id"))
+    menuhistory = db.Column(db.Text)
+    record_at = db.Column(db.Date, default=datetime.now().date)  
