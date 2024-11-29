@@ -1,0 +1,9 @@
+{% extends "exercise/base.html" %}
+{% block title %}体重記録{% endblock %}
+{% block content %}
+
+<div class="errortext">
+    <p>本日の運動プランはすでに作成されています</p>
+    <a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+</div>
+{% endblock %}
