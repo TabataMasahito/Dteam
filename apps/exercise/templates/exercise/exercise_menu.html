@@ -1,14 +1,17 @@
 {% extends "exercise/base.html" %}
 {% block title %}運動モード選択{% endblock %}
 {% block content %}
+
 <a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
 <body>
-    <h2>{{ username }}さんの運動メニュー</h2>
- 
-    <p><strong>提案されたメニュー:</strong></p>
- 
+    
+    <div class="exercise_menu_title">
+        <h2>{{ username }}さんの運動メニュー</h2>
+    </div>
     <div class="d-flex justify-content-center">
+        
         <pre id="response-container">{{ response }}</pre>
+
     </div>
  
     <script>

@@ -32,8 +32,9 @@
     text-align: center;  /* テキスト中央揃え */
     max-width: 80%;  /* 最大幅を指定（必要に応じて調整） */
     white-space: pre-wrap;  /* 改行を適切に表示 */
+    margin-top: 30px;
     margin-bottom: 50px;
-    background-color: #f8f9fa;  /* 明るい背景色 */
+    background-color: #f8f9fa;  /* 背景色 */
     border: 2px solid #007bff;  /* 青い枠線 */
     border-radius: 10px;  /* 角を丸くする */
     padding: 20px;  /* 内側に余白を追加 */
@@ -93,3 +94,8 @@
     align-items: center;     /* 縦方向に中央寄せ */
     min-height: 70vh;       /* ビューポート全体の高さ */
 }
+.exercise_menu_title{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
