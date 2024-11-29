@@ -2,10 +2,9 @@
 {% extends "exercise/base.html" %}
 {% block title %}プラン設定{% endblock %}
 {% block content %}
-<h2>プラン設定</h2>
-<p>
-運動プランの設定が完了しました
-</p>
-</form>
+<div class="complete-texts">
+    <h2>プラン設定</h2>
+    <p>運動プランの設定が完了しました</p>
+</div>
 <a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
 {% endblock %}
