@@ -3,12 +3,11 @@
 {% block title %}目標設定{% endblock %}
 {% block content %}
 <div class="container my-5">
-    <a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+    <a class="btn btn-secondary mb-4" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
     <header class="text-center mb-4">
         <h2>目標設定</h2>
     </header>
     <section>
-    <div class="goal_setting">
         <form action="{{ url_for('exercise.goal_setting') }}" method="POST" novalidate="novalidate" class="card p-4 shadow">
             {{ form.csrf_token }}
 
@@ -53,8 +52,6 @@
                 {{ form.submit(class="btn btn-primary btn-block") }}
             </div>
         </form>
-    </div>
     </section>
 </div>
 {% endblock %}
-
