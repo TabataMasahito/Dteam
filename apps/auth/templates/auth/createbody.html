@@ -2,29 +2,35 @@
 {% block title %}身体情報登録{% endblock %}
 {% block content %}
 <div class="container my-5">
-    <div class="card mx-auto shadow-sm" style="max-width: 500px;">
+    <div class="card mx-auto shadow-lg" style="max-width: 500px;">
         <header class="card-header text-center bg-primary text-white">
             <h4>身体情報登録</h4>
         </header>
         <div class="card-body">
-            <form action="{{ url_for('auth.bodycreate', next=request.args.get('next')) }}" method="POST" novalidate="novalidate" class="form-signin">
+            <form action="{{ url_for('auth.bodycreate', next=request.args.get('next')) }}" method="POST" novalidate="novalidate">
                 {{ form.csrf_token }}
 
+                <!-- フラッシュメッセージ -->
                 {% for message in get_flashed_messages() %}
                 <div class="alert alert-warning text-center">
                     {{ message }}
                 </div>
                 {% endfor %}
 
+                <!-- 年齢 -->
                 <div class="mb-3">
-                    <label for="age" class="form-label">年齢</label>
-                    {{ form.age(class="form-control", placeholder="年齢") }}
-                    <small class="text-muted">例: 25</small>
-                    {% for error in form.age.errors %}
+                    <label for="form-age" class="form-label">身長</label>
+                    <div class="input-group">
+                        {{ form.height(id="form-age", class="form-control", placeholder="年齢") }}
+                        <span class="input-group-text">歳</span>
+                    </div>
+                    <small class="text-muted"></small>
+                    {% for error in form.height.errors %}
                     <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
                 </div>
 
+                <!-- 性別 -->
                 <div class="mb-3">
                     <label class="form-label">性別</label>
                     <div class="d-flex gap-3">
@@ -40,24 +46,33 @@
                     {% endfor %}
                 </div>
 
+                <!-- 身長 -->
                 <div class="mb-3">
-                    <label for="height" class="form-label">身長</label>
-                    {{ form.height(class="form-control", placeholder="身長") }}
-                    <small class="text-muted">単位: cm（小数も利用できます）</small>
+                    <label for="form-height" class="form-label">身長</label>
+                    <div class="input-group">
+                        {{ form.height(id="form-height", class="form-control", placeholder="身長") }}
+                        <span class="input-group-text">cm</span>
+                    </div>
+                    <small class="text-muted">（小数も利用できます）</small>
                     {% for error in form.height.errors %}
                     <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
                 </div>
 
+                <!-- 体重 -->
                 <div class="mb-3">
-                    <label for="weight" class="form-label">体重</label>
-                    {{ form.weight(class="form-control", placeholder="体重") }}
-                    <small class="text-muted">単位: kg（小数も利用できます）</small>
+                    <label for="form-weight" class="form-label">体重</label>
+                    <div class="input-group">
+                        {{ form.weight(id="form-weight", class="form-control", placeholder="体重") }}
+                        <span class="input-group-text">kg</span>
+                    </div>
+                    <small class="text-muted">（小数も利用できます）</small>
                     {% for error in form.weight.errors %}
                     <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
                 </div>
 
+                <!-- 送信ボタン -->
                 <div class="d-grid">
                     {{ form.submit(class="btn btn-primary btn-block") }}
                 </div>

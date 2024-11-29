@@ -2,31 +2,59 @@
 {% extends "exercise/base.html" %}
 {% block title %}目標設定{% endblock %}
 {% block content %}
-<a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
-<h2>目標設定</h2>
-<form action="{{ url_for('exercise.goal_setting') }}" method="POST" novalidate="novalidate">
-    {{ form.csrf_token }}
-    <p>
-    {{ form.period(placeholder="目標期間") }}日
-    </p>
-    {% for error in form.period.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
+<div class="container my-5">
+    <a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+    <header class="text-center mb-4">
+        <h2>目標設定</h2>
+    </header>
+    <section>
+    <div class="goal_setting">
+        <form action="{{ url_for('exercise.goal_setting') }}" method="POST" novalidate="novalidate" class="card p-4 shadow">
+            {{ form.csrf_token }}
 
-    <p>
-    {{ form.goalweight(placeholder="目標体重") }}kg
-    </p>
-    {% for error in form.goalweight.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
+            <!-- 目標期間 -->
+            <div class="mb-3">
+                <label for="form-period" class="form-label">目標期間</label>
+                <div class="input-group">
+                    {{ form.period(id="form-period", class="form-control", placeholder="目標期間") }}
+                    <span class="input-group-text">日</span>
+                </div>
+                {% for error in form.period.errors %}
+                <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
 
-    <p>
-    {{ form.numberexercisesweek(placeholder="週に何日利用するか") }}日
-    </p>
-    {% for error in form.numberexercisesweek.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
+            <!-- 目標体重 -->
+            <div class="mb-3">
+                <label for="form-goalweight" class="form-label">目標体重</label>
+                <div class="input-group">
+                    {{ form.goalweight(id="form-goalweight", class="form-control", placeholder="目標体重") }}
+                    <span class="input-group-text">kg</span>
+                </div>
+                {% for error in form.goalweight.errors %}
+                <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
 
-    <p>{{ form.submit() }}</p>
-</form>
+            <!-- 週の利用日数 -->
+            <div class="mb-3">
+                <label for="form-numberexercisesweek" class="form-label">１週間の運動回数</label>
+                <div class="input-group">
+                    {{ form.numberexercisesweek(id="form-numberexercisesweek", class="form-control", placeholder="１週間の運動回数") }}
+                    <span class="input-group-text">日</span>
+                </div>
+                {% for error in form.numberexercisesweek.errors %}
+                <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- 送信ボタン -->
+            <div class="d-grid">
+                {{ form.submit(class="btn btn-primary btn-block") }}
+            </div>
+        </form>
+    </div>
+    </section>
+</div>
 {% endblock %}
+

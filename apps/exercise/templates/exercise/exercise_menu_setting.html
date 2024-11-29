@@ -12,9 +12,9 @@
 
             <div class="mb-3">
                 <label class="form-label">運動器具の有無</label>
-                <div class="form-check">
+                <div class="form-check d-flex flex-row">
                     {% for choice in form.exerciseitem %}
-                        <div class="form-check">
+                        <div class="form-check form-check-inline">
                             <label class="form-check-label">
                                 {{ choice() }} {{ choice.label.text }}
                             </label>
@@ -28,9 +28,9 @@
 
             <div class="mb-3">
                 <label class="form-label">運動の強度</label>
-                <div class="form-check">
+                <div class="form-check d-flex flex-row">
                     {% for choice in form.strength %}
-                        <div class="form-check">
+                        <div class="form-check form-check-inline">
                             <label class="form-check-label">
                                 {{ choice() }} {{ choice.label.text }}
                             </label>

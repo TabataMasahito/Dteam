@@ -42,8 +42,9 @@
 
 /* nav-link クラスのスタイル */
 .menu-btn {
+    margin-top: 10px;
     display: inline-block; /* ブロック要素にしてクリック範囲を広げる */
-    padding: 10px 15px;    /* 内側の余白を設定 */
+    padding: 7px 12px;    /* 内側の余白を設定 */
     color: #ffffff;        /* テキストの色 */
     background-color: #007bff; /* 背景色 */
     text-decoration: none; /* 下線を削除 */
@@ -59,6 +60,36 @@
     color: #f8f9fa;           /* テキストの色を変更 */
 }
 
-.navbar-brand {
-    margin-left: 50px;
+.navbar {
+    height: 60px; /* ナビゲーションバーの高さを固定 */
+    display: flex;
+    align-items: center; /* 垂直方向に中央揃え */
+}
+
+.navbar .navbar-brand {
+    font-size: 1.5rem; /* ロゴのサイズを調整 */
+    text-align: center; /* 中央揃えを補強 */
+}
+
+.modetitle{
+    margin-bottom: 30px;
+}
+
+.form-check-inline-mode{
+    font-size: 20px;
+    margin-bottom: 30px;
+    
+
+}
+.errortext{
+    margin-top: 50px;
+    text-align: center;
+    font-size: large;
+
+}
+.goal_setting {
+    display: flex;
+    justify-content: center; /* 横方向に中央寄せ */
+    align-items: center;     /* 縦方向に中央寄せ */
+    min-height: 70vh;       /* ビューポート全体の高さ */
 }

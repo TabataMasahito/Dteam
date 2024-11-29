@@ -1,21 +1,35 @@
-<!-- 田端将人 -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8" />
-    <title>unpo</title>
+    <title>DZAP</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
- <!-- ナビゲーションバーを作成する -->
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-    </div>
-</nav>
+<body>
+    <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container d-flex justify-content-between align-items-center">
+            <!-- 左側のリンク -->
+            <div class="d-flex align-items-center">
+               
+            </div>
+            
+            <!-- 中央のブランド -->
+            <a class="navbar-brand mx-auto position-absolute" href="{{ url_for('exercise.index') }}" style="left: 50.7%; transform: translateX(-50%);">
+                DZAP
+            </a>
 
-<!-- block contentをsection class="container"で囲む -->
-<section class="container">
-    {% block content %}{% endblock %}
-</section>
+            <!-- 右側のリンク -->
+            <div class="d-flex align-items-center">
+            
+            </div>
+        </div>
+    </nav>
+
+    <!-- コンテンツセクション -->
+    <section class="container">
+        {% block content %}{% endblock %}
+    </section>
 </body>
 </html>
