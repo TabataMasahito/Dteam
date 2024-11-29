@@ -2,15 +2,25 @@
 {% extends "exercise/base.html" %}
 {% block title %}目標確認{% endblock %}
 {% block content %}
-<a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
-<h2>目標確認</h2>
-    <p>{{mode}}モード</p>
-    あなたの目標体重{{goalweight}}kg
-    <p>
-    目標期間まで残り<integer>{{ remainingdays }}</integer>日、
-    </p>
-    <p>現在の体重{{nowweight}}kg</p>
-    <p>目標体重まで残り<strong>{{ remaining_weight }}</strong>kg!</p>
+<div class="container my-5">
+    <a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+    <header class="text-center mb-4">
+        <h3>目標確認</h3>
+    </header>
+    <div class="text-center mb-4">
+        <span class="badge bg-info text-dark fs-5">{{ mode }}モード</span>
+    </div>
 
-    <p>頑張りましょう！</p>
+    <div class="confirm">
+        <p><strong>残り日数:</strong> <span class="text-primary">{{ remainingdays }}</span> 日</p>
+        <p><strong>目標体重:</strong> {{ goalweight }} kg</p>
+        <p><strong>現在の体重:</strong> {{ nowweight }} kg</p>
+        <p><strong>目標体重まで:</strong> <span class="text-danger fw-bold">{{ remaining_weight }}</span> kg</p>
+    </div>
+
+    <div class="text-center">
+        <p class="fs-5 mb-3">頑張りましょう！</p>
+        <i class="fas fa-dumbbell text-primary fs-2"></i>
+    </div>
+</div>
 {% endblock %}

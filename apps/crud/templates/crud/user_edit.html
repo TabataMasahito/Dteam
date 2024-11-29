@@ -1,63 +1,72 @@
-<!-- 田辺然大 -->
 {% extends "exercise/base.html" %}
 {% block title %}ユーザー情報管理{% endblock %}
 {% block content %}
-<a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
-<h2>ユーザー情報管理</h2>
+<div class="container my-5">
+    <a class="menu-btn btn btn-outline-primary mb-4" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+    <header class="text-center mb-4">
+        <h3>ユーザー情報管理</h3>
+    </header>
 
-<form
-    action="{{ url_for('crud.user_edit', user_id=user.id) }}"
-    method="POST"
-    novalidate="novalidate"
->
-    {{ form.csrf_token }}
+    <div class="card shadow-lg p-4 rounded-3" style="max-width: 600px; margin: auto;">
+        <form action="{{ url_for('crud.user_edit', user_id=user.id) }}" method="POST" novalidate="novalidate">
+            {{ form.csrf_token }}
 
-    <!-- IDの表示 -->
-    <p>
-        <label>ID: </label>
-        <span>{{ user.id }}</span>
-    </p>
+            <!-- IDの表示 -->
+            <div class="mb-3">
+                <label class="form-label">ID:{{ user.id }}</label>
+            </div>
 
-    <!-- ユーザー名の変更 -->
-    <p>
-        {{ form.username.label }} {{ form.username(placeholder=form.username.data) }}
-    </p>
-    {% for error in form.username.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
+            <!-- ユーザー名の変更 -->
+            <div class="mb-3">
+                <label class="form-label" for="username">{{ form.username.label }}</label>
+                {{ form.username(class="form-control", placeholder=form.username.data) }}
+                {% for error in form.username.errors %}
+                <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
 
-    <!-- アカウント作成時の体重を表示 -->
-    <p>
-        <label>アカウント作成時の体重: </label>
-        <span>{{ user.weight }}kg</span>
-    </p>
+            <!-- アカウント作成時の体重を表示 -->
+            <div class="mb-3">
+                <label class="form-label">アカウント作成時の体重:{{ user.weight }} kg</label>
+            </div>
 
-    <p>
-        {{ form.age.label }} {{ form.age(placeholder=form.age.data) }}歳
-    </p>
-    {% for error in form.age.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
+            <!-- 年齢の変更 -->
+            <div class="mb-3">
+                <label class="form-label" for="age">{{ form.age.label }}</label>
+                {{ form.age(class="form-control", placeholder=form.age.data) }}歳
+                {% for error in form.age.errors %}
+                <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
 
-    <p>
-        {{ form.height.label }} {{ form.height(placeholder=form.height.data) }}cm
-    </p>
-    {% for error in form.height.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
+            <!-- 身長の変更 -->
+            <div class="mb-3">
+                <label class="form-label" for="height">{{ form.height.label }}</label>
+                {{ form.height(class="form-control", placeholder=form.height.data) }} cm
+                {% for error in form.height.errors %}
+                <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
 
-    <p><input type="submit" value="更新" /></p>
-</form>
+            <!-- 更新ボタン -->
+            <div class="d-grid mb-4">
+                <input type="submit" class="btn btn-success btn-block" value="更新" />
+            </div>
+        </form>
 
-<form action="{{ url_for('crud.delete_user', user_id=current_user.id) }}" method="POST" onsubmit="return confirmDeletion()">
-    {{ form.csrf_token }}
-    <input type="submit" value="削除">
-</form>
+        <!-- 削除フォーム -->
+        <form action="{{ url_for('crud.delete_user', user_id=current_user.id) }}" method="POST" onsubmit="return confirmDeletion()">
+            {{ form.csrf_token }}
+            <div class="d-grid">
+                <input type="submit" class="btn btn-danger btn-block" value="アカウント削除" />
+            </div>
+        </form>
+    </div>
 
-<script>
-    function confirmDeletion() {
-        return confirm("本当に削除しますか？");
-    }
-</script>
-
+    <script>
+        function confirmDeletion() {
+            return confirm("本当に削除しますか？");
+        }
+    </script>
+</div>
 {% endblock %}

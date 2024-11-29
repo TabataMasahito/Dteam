@@ -347,6 +347,7 @@ def exercise_menu():
 
     formatted_response = format_response(response.text)
 
+
     return render_template(
             'exercise/exercise_menu.html',
             question=question,
