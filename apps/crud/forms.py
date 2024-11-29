@@ -53,6 +53,11 @@ class BodyForm(FlaskForm):
     submit = SubmitField("登録")
 
 class EditBodyForm(FlaskForm):
+    username = StringField(
+        "ユーザー名",
+        validators=[
+            DataRequired(message="ユーザー名は必須です。")        ],
+    )
     age=IntegerField(
         "年齢",
         validators=[

@@ -91,11 +91,13 @@ def user_edit(user_id):
     user = current_user  # ログイン中のユーザーを取得
 
     if request.method == "GET":  # GETリクエストの場合、初期値を設定
+        bodyform.username.data = user.username
         bodyform.age.data = user.age
         bodyform.height.data = user.height
 
     # formからサブミットされた場合はメニュー画面へリダイレクトする
     if bodyform.validate_on_submit():
+        user.username = bodyform.username.data
         user.age = bodyform.age.data
         user.height = bodyform.height.data
         db.session.add(user)
