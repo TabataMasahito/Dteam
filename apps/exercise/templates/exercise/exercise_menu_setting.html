@@ -2,60 +2,65 @@
 {% block title %}運動モード選択{% endblock %}
 {% block content %}
 <div class="container my-5">
-    <a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
-    <header class="text-center mb-4">
-        <h3>運動メニュー作成</h3>
-    </header>
-    <section>
-        <form action="{{ url_for('exercise.exercise_menu_setting') }}" method="POST" novalidate="novalidate">
-            {{ form.csrf_token }}
+    <a class="menu-btn btn btn-outline-primary mb-4" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+    <div class="card mx-auto shadow-lg" style="max-width: 600px;">
+        <header class="card-header text-center bg-primary text-white">
+            <h4>運動メニュー作成</h4>
+        </header>
+        <div class="card-body">
+            <form action="{{ url_for('exercise.exercise_menu_setting') }}" method="POST" novalidate="novalidate">
+                {{ form.csrf_token }}
 
-            <div class="mb-3">
-                <label class="form-label">運動器具の有無</label>
-                <div class="form-check d-flex flex-row">
-                    {% for choice in form.exerciseitem %}
+                <!-- 運動器具の有無 -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">運動器具の有無</label>
+                    <div class="d-flex gap-3">
+                        {% for choice in form.exerciseitem %}
                         <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                {{ choice() }} {{ choice.label.text }}
-                            </label>
+                            {{ choice(class="form-check-input") }}
+                            <label class="form-check-label">{{ choice.label.text }}</label>
                         </div>
+                        {% endfor %}
+                    </div>
+                    {% for error in form.exerciseitem.errors %}
+                    <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
                 </div>
-                {% for error in form.exerciseitem.errors %}
-                    <div class="text-danger small">{{ error }}</div>
-                {% endfor %}
-            </div>
 
-            <div class="mb-3">
-                <label class="form-label">運動の強度</label>
-                <div class="form-check d-flex flex-row">
-                    {% for choice in form.strength %}
+                <!-- 運動の強度 -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">運動の強度</label>
+                    <div class="d-flex gap-3">
+                        {% for choice in form.strength %}
                         <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                {{ choice() }} {{ choice.label.text }}
-                            </label>
+                            {{ choice(class="form-check-input") }}
+                            <label class="form-check-label">{{ choice.label.text }}</label>
                         </div>
+                        {% endfor %}
+                    </div>
+                    {% for error in form.strength.errors %}
+                    <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
                 </div>
-                {% for error in form.strength.errors %}
-                    <div class="text-danger small">{{ error }}</div>
-                {% endfor %}
-            </div>
 
-            <div class="mb-3">
-                <label class="form-label">運動時間</label>
-                <div>
-                    {{ form.minutes(id="form-minutes", class="form-control") }} 分
+                <!-- 運動時間 -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">運動時間</label>
+                    <div class="input-group">
+                        {{ form.minutes(id="form-minutes", class="form-control w-50") }}
+                        <span class="input-group-text">分</span>
+                    </div>
+                    {% for error in form.minutes.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
                 </div>
-                {% for error in form.minutes.errors %}
-                    <div class="text-danger small">{{ error }}</div>
-                {% endfor %}
-            </div>
 
-            <div class="d-grid">
-                {{ form.submit(class="btn btn-primary btn-block") }}
-            </div>
-        </form>
-    </section>
+                <!-- 提出ボタン -->
+                <div class="d-grid">
+                    {{ form.submit(class="btn btn-primary btn-block") }}
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
