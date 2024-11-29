@@ -18,11 +18,13 @@
         <span>{{ user.id }}</span>
     </p>
 
-    <!-- ユーザー名の表示 -->
+    <!-- ユーザー名の変更 -->
     <p>
-        <label>ユーザー名: </label>
-        <span>{{ user.username }}</span>
+        {{ form.username.label }} {{ form.username(placeholder=form.username.data) }}
     </p>
+    {% for error in form.username.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
 
     <!-- アカウント作成時の体重を表示 -->
     <p>
