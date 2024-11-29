@@ -5,6 +5,8 @@
 <div class="errortext">
     <p>現在別のプランが登録されています。</p>
     <p>このプランが終了するまで変更や新しく開始することはできません。</p>
+    <p>現在登録されているプランは「{{ user_record_exists.mode }}モード」です</p>
+    <p>次のプランは「{{ future_date }}」日以降に設定できます</p>
     <a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
 </div>
 {% endblock %}

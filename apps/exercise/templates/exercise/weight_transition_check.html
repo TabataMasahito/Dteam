@@ -4,7 +4,10 @@
 <a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="weight-transition-check-title">
 <h2>体重推移確認</h2>
+<p>{{ current_user.username }}の体重推移グラフ</p>
+</div>
 <canvas id="weightChart" width="40" height="20"></canvas>
 <script>
     // グラフの描画

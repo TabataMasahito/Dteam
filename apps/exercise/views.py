@@ -49,7 +49,7 @@ def mode_select():
 
         # まだ過去に設定したプランの日数が残っている場合はエラー画面へ
         if remainingdays.days >= 1:
-            return render_template("exercise/plan_setting_error.html")
+            return render_template("exercise/plan_setting_error.html",user_record_exists=user_record_exists,future_date=future_date)
         
 
     form = ModeSelectForm()
