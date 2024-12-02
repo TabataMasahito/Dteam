@@ -376,3 +376,6 @@ def exercise_menu():
             response=formatted_response,
             username=current_user.username
         )
+
+
+# 履歴を表示する機能
