@@ -1,7 +1,45 @@
 {% extends "exercise/base.html" %}
-{% block title %}体重記録{% endblock %}
-{% block content %}
 
-<p>運動プランの履歴</p>
+{% block title %}運動メニュー履歴{% endblock %}
+
+{% block content %}
 <a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+
+<div class="exercise_menu_title">
+    <h2>{{ username }}さんの運動メニュー履歴</h2>
+</div>
+
+<form method="get" action="{{ url_for('exercise.menu_history') }}">
+    <label for="date">日付を選択してください:</label>
+    <input type="date" id="date" name="date" value="{{ selected_date }}">
+    <button type="submit" class="btn btn-primary">履歴を表示</button></form>
+
+{% if menuhistory %}
+    <div class="menu-history-container">
+        {% for menu in menuhistory %}
+            <div class="menu-history-item">
+                <h3>{{ menu.name }}</h3>
+                <p>{{ menu.details }}</p>
+                <pre id="menu-{{ loop.index }}">{{ menu.menuhistory }}</pre>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>{{ selected_date }}のメニュー履歴はありません。</p>
+{% endif %}
+
+<script>
+    // 各履歴にJavaScriptを適用
+    document.querySelectorAll('pre[id^="menu-"]').forEach(preElement => {
+        const originalText = preElement.textContent;
+
+        // "**" を改行に置き換え
+        let updatedText = originalText.replace(/\*\*/g, '\n');
+
+        // "*" と ":" の間の文字を太字にする
+        updatedText = updatedText.replace(/\*(.*?)\*:/g, '<strong>$1</strong>:');
+
+        preElement.innerHTML = updatedText;
+    });
+</script>
 {% endblock %}

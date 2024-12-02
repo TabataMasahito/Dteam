@@ -7,6 +7,7 @@ from flask_login import login_required,current_user
 from datetime import datetime,timedelta,date
 from sqlalchemy import desc
 import google.generativeai as genai
+from flask import request
 # template_folderを指定する（staticは指定しない）
 dt = Blueprint("exercise", __name__, template_folder="templates")
 # dtアプリケーションを使ってエンドポイントを作成する
@@ -244,7 +245,7 @@ def exercise_menu_setting():
     exercise_records = WeightRecord.query.filter_by(user_id=user_id).all()
     if not exercise_records:
         # レコードがない場合はエラーページにリダイレクト
-        return render_template("exercise/exercise_error.html")
+        return render_template("exercise/weight_recode_error.html")
     user_record_exists = ExercisePlan.query.filter_by(user_id=user_id).order_by(desc(ExercisePlan.record_at)).first()
     if user_record_exists: 
 
@@ -282,7 +283,7 @@ def exercise_menu_setting():
         return render_template("exercise/weight_recode_error.html")
     
     munu_history_records = ExerciseHistory.query.filter_by(user_id=user_id,record_at=today).count()
-    if munu_history_records==3:
+    if munu_history_records>=3:
         return render_template("exercise/exercise_menu_error.html")
 
 
@@ -379,3 +380,21 @@ def exercise_menu():
 
 
 # 履歴を表示する機能
+@dt.route('/menu_history', methods=['GET', 'POST'])
+@login_required
+def menu_history():
+    user_id = current_user.id
+    # デフォルトでは今日の日付
+    date_str = request.args.get('date', str(date.today()))
+    try:
+        # クエリパラメータで渡された日付文字列を日付型に変換
+        history_date = datetime.strptime(date_str, '%Y-%m-%d').date()
+    except ValueError:
+        # 不正な日付が渡された場合は今日の日付を使用
+        history_date = date.today()
+
+    menuhistory = ExerciseHistory.query.filter_by(user_id=user_id, record_at=history_date).all()
+    return render_template('exercise/exercise_menu_history.html', 
+                           menuhistory=menuhistory, 
+                           username=current_user.username,
+                           selected_date=history_date)

@@ -111,4 +111,39 @@
     text-align: center;
 }
 
+.menu-history-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem; /* アイテム間の余白を少し縮小 */
+    margin: 0.8rem 0;
+}
 
+.menu-history-item {
+    border: 1px solid #ccc;
+    border-radius: 6px; /* 角丸を少し小さく */
+    padding: 0.8rem; /* パディングを縮小 */
+    background-color: #f9f9f9;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* シャドウを控えめに */
+}
+
+.menu-history-item h3 {
+    margin: 0;
+    font-size: 1rem; /* ヘッダーサイズを少し小さく */
+    color: #333;
+}
+
+.menu-history-item p {
+    margin: 0.3rem 0; /* 上下の余白を少し縮小 */
+    color: #666;
+    font-size: 0.9rem; /* フォントサイズを少し小さく */
+}
+
+.menu-history-item pre {
+    background-color: #fff;
+    padding: 0.4rem; /* パディングを縮小 */
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    font-size: 0.9rem; /* フォントサイズを少し小さく */
+}
