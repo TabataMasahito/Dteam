@@ -1,7 +1,7 @@
 #田端将人
 from apps.exercise.forms import ModeSelectForm,WeightRecordForm,GoolSettingForm,ExerciseForm
 from flask import Blueprint, render_template, flash, url_for, redirect,session,jsonify
-from apps.exercise.models import WeightRecord,ExercisePlan
+from apps.exercise.models import WeightRecord,ExercisePlan,ExerciseHistory
 from apps.app import db
 from flask_login import login_required,current_user
 from datetime import datetime,timedelta,date
@@ -280,6 +280,12 @@ def exercise_menu_setting():
     if not user_records:
         # レコードがない場合はエラーページにリダイレクト
         return render_template("exercise/weight_recode_error.html")
+    
+    munu_history_records = ExerciseHistory.query.filter_by(user_id=user_id,record_at=today).count()
+    if munu_history_records==3:
+        return render_template("exercise/exercise_menu_error.html")
+
+
     exerciseform=ExerciseForm()
     if exerciseform.validate_on_submit():
         exerciseitem = exerciseform.exerciseitem.data
@@ -346,6 +352,22 @@ def exercise_menu():
         return '\n'.join(formatted)
 
     formatted_response = format_response(response.text)
+
+
+    count = ExerciseHistory.query.filter_by(user_id=user_id).count()
+            # 新しいidを生成 (renameにcountを結合)
+    new_id = user_id+"menuhistory"+str(count + 1)
+
+    exercise_menuhistory = ExerciseHistory(
+        id=new_id,
+        user_id=user_id,
+        menuhistory=formatted_response,
+        exercise_item=exerciseitem,
+        strength=strength,
+        minutes=minutes
+            )
+    db.session.add(exercise_menuhistory)
+    db.session.commit()
 
 
     return render_template(

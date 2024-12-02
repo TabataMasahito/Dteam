@@ -27,5 +27,8 @@ class ExerciseHistory(db.Model):
     # カラムを定義する
     id = db.Column(db.String, primary_key=True)
     user_id = db.Column(db.String, db.ForeignKey("acount.id"))
+    exercise_item=db.Column(db.String(1))
+    strength=db.Column(db.String(1))
+    minutes=db.Column(db.Integer)
     menuhistory = db.Column(db.Text)
     record_at = db.Column(db.Date, default=datetime.now().date)  
