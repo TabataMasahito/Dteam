@@ -5,6 +5,10 @@
 {% block content %}
 <a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
 
+<a class="btn btn-outline-primary" href="{{ url_for('exercise.exercise_menu_setting') }}">
+    運動メニュー作成
+</a>
+
 <div class="exercise_menu_title">
     <h2>{{ username }}さんの運動メニュー履歴</h2>
 </div>
