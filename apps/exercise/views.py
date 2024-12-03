@@ -370,13 +370,20 @@ def exercise_menu():
     db.session.add(exercise_menuhistory)
     db.session.commit()
 
+    session['menu'] = formatted_response
 
-    return render_template(
-            'exercise/exercise_menu.html',
-            question=question,
-            response=formatted_response,
-            username=current_user.username
-        )
+
+
+    return redirect(url_for("exercise.exercise_menuscreen"))
+
+
+# 運動メニューをhtml上に表示する
+@dt.route('/exercise_menuscreen')
+@login_required  # ログインしていないとアクセスできないようにする
+def exercise_menuscreen():
+    username = current_user.username
+    formatted_response = session.get('menu')
+    return render_template('exercise/exercise_menu.html',username=username,response=formatted_response)
 
 
 # 履歴を表示する機能
