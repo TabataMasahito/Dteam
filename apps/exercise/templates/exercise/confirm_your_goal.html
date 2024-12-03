@@ -2,24 +2,26 @@
 {% extends "exercise/base.html" %}
 {% block title %}目標確認{% endblock %}
 {% block content %}
-<div class="container my-5">
-    <a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
-    <header class="text-center mb-4">
-        <h3>目標確認</h3>
-    </header>
-    <div class="text-center mb-4">
-        <span class="badge bg-info text-dark fs-5">{{ mode }}モード</span>
-    </div>
 
-    <div class="confirm">
-        <p><strong>残り日数:</strong> <span class="text-primary">{{ remainingdays }}</span> 日</p>
-        <p><strong>目標体重:</strong> {{ goalweight }} kg</p>
-        <p><strong>現在の体重:</strong> {{ nowweight }} kg</p>
-        <p><strong>目標体重まで:</strong> <span class="text-danger fw-bold">{{ remaining_weight }}</span> kg</p>
-    </div>
+    <div class="container my-5">
+        <a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+        <header class="text-center mb-5">
+            <h3 class="font-weight-bold">目標確認</h3>
+        </header>
 
-    <div class="text-center">
-        <p class="fs-5 mb-3">頑張りましょう！</p>
-        <i class="fas fa-dumbbell text-primary fs-2"></i>
+        <div class="progress my-4">
+            <div class="progress-bar" role="progressbar" style="width: {{ progress_percentage }}%;" aria-valuenow="{{ progress_percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    
+        <div class="confirm mb-5 p-4 bg-light rounded shadow-lg">
+            <span class="badge badge-success text-danger fs-4">{{ mode }}モード</span>
+            <p class="fs-4"><strong>残り日数:</strong> <span class="text-danger fs-3">{{ remainingdays }}</span> 日</p>
+            <p class="fs-4"><strong>目標体重:</strong> <span class="text-success fs-3">{{ goalweight }} kg</span></p>
+            <p class="fs-4"><strong>現在の体重:</strong> <span class="text-warning fs-3">{{ nowweight }} kg</span></p>
+            <p class="fs-4"><strong>目標体重まで:</strong> <span class="text-danger font-weight-bold fs-3">{{ remaining_weight }}</span> kg</p>
+            <p class="fs-4 mb-3 text-primary font-weight-bold">あなたならできる！</p>
+            <i class="fas fa-dumbbell text-primary fs-4 mb-3"></i>
+            <p class="fs-4 text-success font-weight-bold">一緒に頑張ろう！</p>
+        </div>
     </div>
 {% endblock %}

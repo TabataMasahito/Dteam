@@ -2,7 +2,7 @@
 {% extends "exercise/base.html" %}
 {% block title %}体重記録{% endblock %}
 {% block content %}
-<a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+<div class="weight-record">
 <h2>体重記録</h2>
 <form action="{{ url_for('exercise.weight_record') }}" method="POST" novalidate="novalidate">
     {{ form.csrf_token }}
@@ -13,6 +13,34 @@
     <span style="color: red;">{{ error }}</span>
     {% endfor %}
 
-    <p>{{ form.submit() }}</p>
+    <p class="submit-btn-container">{{ form.submit(class="submit-btn") }}</p>
 </form>
+<a class="menu-btn" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+</div>
+
+<style>
+    .weight-record {
+        text-align: center;
+    }
+    .submit-btn-container {
+        margin-top: 20px;
+    }
+    .submit-btn {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    .submit-btn:hover {
+        background-color: #0056b3; /* ホバー時の色 */
+    }
+</style>
 {% endblock %}
