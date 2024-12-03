@@ -147,3 +147,7 @@
     white-space: pre-wrap;
     font-size: 0.9rem; /* フォントサイズを少し小さく */
 }
+.nav-link:hover {
+    color: #FFD700; /* ゴールド色に変更 */
+    text-decoration: underline; /* アンダーラインを追加 (任意) */
+}
