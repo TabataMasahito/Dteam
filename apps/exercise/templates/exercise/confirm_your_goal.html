@@ -8,8 +8,12 @@
         <header class="text-center mb-5">
             <h3 class="font-weight-bold">目標確認</h3>
         </header>
-        
+
         <div class="confirm mb-5 p-4 bg-light rounded shadow-lg">
+            <!-- 右側の画像 -->
+            <img src="" alt="Right Image" class="position-absolute end-0 top-50 translate-middle-y" style="width: 300px; height: auto;">
+            <!-- 左側の画像 -->
+            <img src="" alt="Left Image" class="position-absolute start-0 top-50 translate-middle-y" style="width: 300px; height: auto;">
             <span class="badge badge-success text-danger fs-4">{{ mode }}モード</span>
             <p class="fs-4"><strong>残り日数:</strong> <span class="text-danger fs-3">{{ remainingdays }}</span> 日</p>
             <p class="fs-4"><strong>目標体重:</strong> <span class="text-success fs-3">{{ goalweight }} kg</span></p>
