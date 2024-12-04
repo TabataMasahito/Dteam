@@ -2,6 +2,7 @@
 from apps.app import db
 from apps.auth.forms import LoginForm,SignupUser,CreateBody
 from apps.crud.models import User
+from apps.exercise.models import WeightRecord
 from flask import Blueprint, render_template, flash, url_for, redirect, request,session
 
 from flask_login import login_user,logout_user
@@ -52,6 +53,8 @@ def bodycreate():
         userid = session.get('userid')
         username = session.get('username')
         password = session.get('password')
+        count = WeightRecord.query.filter_by(user_id=userid).count()
+        new_id = userid + "weight" + str(count + 1)
         
         # ユーザーを作成する
         user = User(
@@ -64,10 +67,19 @@ def bodycreate():
             weight=form.weight.data
         )
         
-
-        # ユーザーを追加してコミットする
         db.session.add(user)
+
+
+        weightrecord = WeightRecord(
+            id=new_id,
+            user_id=userid,
+            recordweight=form.weight.data
+        )
+        db.session.add(weightrecord)
+
         db.session.commit()
+
+
         login_user(user)
         # セッションから情報を削除
         session.pop('userid', None)
@@ -77,7 +89,6 @@ def bodycreate():
         if next_ is None or not next_.startswith("/"):
             next_ = url_for("exercise.index")
         return redirect(next_)
-    # 初期表示またはエラー時の身体情報入力画面.htmlを表示
     return render_template("auth/createbody.html", form=form)
 
 

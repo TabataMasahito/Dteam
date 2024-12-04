@@ -147,14 +147,12 @@ def confirm_your_goal():
     user_id=current_user.id
     today = date.today()
     exercise_records = ExercisePlan.query.filter_by(user_id=user_id).all()
+
+    # 運動プランが設計されていない場合はエラー画面へ
     if not exercise_records:
-        # レコードがない場合はエラーページにリダイレクト
         return render_template("exercise/exercise_error.html")
-    user_records = WeightRecord.query.filter_by(user_id=user_id).all()
-    # 最新の体重が記録されているかチェック
-    if not user_records:
-        # レコードがない場合はエラーページにリダイレクト
-        return render_template("exercise/weight_recode_error.html")
+    
+
     record_at = (
         ExercisePlan.query.filter_by(user_id=user_id)
         .order_by(desc(ExercisePlan.record_at))
@@ -192,6 +190,8 @@ def confirm_your_goal():
 
     future_date = record_at + timedelta(days=period)
     remainingdays = future_date - today
+
+    # 前回のプランが終了していない場合はエラー画面へ
     if remainingdays.days==0:
            return render_template(
         "exercise/goal.html") 
@@ -227,9 +227,7 @@ def weight_data():
 def weight_transition_check():
     user_id=current_user.id
     user_records = WeightRecord.query.filter_by(user_id=user_id).all()
-    if not user_records:
-        # レコードがない場合はエラーページにリダイレクト
-        return render_template("exercise/weight_recode_error.html")
+
     
     # レコードがある場合は通常ページを表示
     return render_template("exercise/weight_transition_check.html", records=user_records)
@@ -242,10 +240,6 @@ def weight_transition_check():
 def exercise_menu_setting():
     user_id=current_user.id
     today = date.today()
-    exercise_records = WeightRecord.query.filter_by(user_id=user_id).all()
-    if not exercise_records:
-        # レコードがない場合はエラーページにリダイレクト
-        return render_template("exercise/weight_recode_error.html")
     user_record_exists = ExercisePlan.query.filter_by(user_id=user_id).order_by(desc(ExercisePlan.record_at)).first()
     if user_record_exists: 
 
@@ -274,14 +268,12 @@ def exercise_menu_setting():
         # まだ過去に設定したプランの日数が残っている場合はエラー画面へ
         if remainingdays.days <= 0 :
             return render_template("exercise/exercise_error.html")
+    else:
+            return render_template("exercise/exercise_error.html")
 
 
 
-    user_records = WeightRecord.query.filter_by(user_id=user_id).all()
-    if not user_records:
-        # レコードがない場合はエラーページにリダイレクト
-        return render_template("exercise/weight_recode_error.html")
-    
+
     munu_history_records = ExerciseHistory.query.filter_by(user_id=user_id,record_at=today).count()
     if munu_history_records>=3:
         return render_template("exercise/exercise_menu_error.html")
