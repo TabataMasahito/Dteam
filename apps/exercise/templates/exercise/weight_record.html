@@ -12,7 +12,7 @@
                 {{ form.csrf_token }}
                 <div class="form-group">
                     <label for="recordweight">体重</label>
-                    {{ form.recordweight(class="form-control", placeholder="体重") }}
+                    {{ form.recordweight(class="form-control", placeholder="体重") }}kg
                     {% for error in form.recordweight.errors %}
                         <small class="form-text text-danger">{{ error }}</small>
                     {% endfor %}
