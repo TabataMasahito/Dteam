@@ -7,7 +7,7 @@ class SignupUser(FlaskForm):
         "ログインID",
         validators=[
             DataRequired(message="すべての項目を入力してください"),
-            Regexp(r'^[a-zA-Z0-9]*$', message="ログインIDは半角英数で入力してください")
+            Regexp(r'^[a-zA-Z0-9]*$', message="空白無しのまたは半角英数で入力してください")
         ]
     )
     
@@ -19,7 +19,7 @@ class SignupUser(FlaskForm):
     )
 
     password = PasswordField("パスワード", validators=[DataRequired(message="すべての項目を入力してください"),
-               Regexp(r'^[a-zA-Z0-9]*$', message="パスワードはは半角英数で入力してください")
+               Regexp(r'^[a-zA-Z0-9]*$', message="空白無しのまたは半角英数で入力してください")
         ]
     )
     
