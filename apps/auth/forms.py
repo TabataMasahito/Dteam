@@ -1,25 +1,28 @@
 # 田端将人
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField,IntegerField,RadioField,FloatField,SelectField
-from wtforms.validators import DataRequired, Email, length,NumberRange
-# ユーザー新規作成とユーザー編集フォームクラス
+from wtforms.validators import DataRequired, Email, length,NumberRange,Regexp
 class SignupUser(FlaskForm):
     userid = StringField(
         "ログインID",
         validators=[
             DataRequired(message="すべての項目を入力してください"),
+            Regexp(r'^[a-zA-Z0-9]*$', message="ログインIDは半角英数で入力してください")
         ]
     )
-    # ユーザーフォームのusername属性のラベルとバリデータを設定する
+    
     username = StringField(
         "ユーザー名",
         validators=[
-            DataRequired(message="すべての項目を入力してください")        ],
+            DataRequired(message="すべての項目を入力してください")
+        ]
     )
 
-    # ユーザーフォームpassword属性のラベルとバリデータを設定する
-    password = PasswordField("パスワード", validators=[DataRequired(message="すべての項目を入力してください")])
-    # ユーザーフォームsubmitの文言を設定する
+    password = PasswordField("パスワード", validators=[DataRequired(message="すべての項目を入力してください"),
+               Regexp(r'^[a-zA-Z0-9]*$', message="パスワードはは半角英数で入力してください")
+        ]
+    )
+    
     submit = SubmitField("次へ")
 
 class CreateBody(FlaskForm):

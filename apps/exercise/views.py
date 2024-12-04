@@ -1,5 +1,5 @@
 #田端将人
-from apps.exercise.forms import ModeSelectForm,WeightRecordForm,GoolSettingForm,ExerciseForm
+from apps.exercise.forms import ModeSelectForm,WeightRecordForm,GoalSettingForm,ExerciseForm
 from flask import Blueprint, render_template, flash, url_for, redirect,session,jsonify
 from apps.exercise.models import WeightRecord,ExercisePlan,ExerciseHistory
 from apps.app import db
@@ -66,14 +66,15 @@ def mode_select():
 @dt.route("/goalsetting", methods=["GET", "POST"])
 @login_required
 def goal_setting():
-    form = GoolSettingForm()
+    form = GoalSettingForm()
+    mode = session.get('mode')  # Retrieve the mode from session
+    
     if form.validate_on_submit():
-        mode = session.get('mode')
-        getid=current_user.id
+        getid = current_user.id
         # DB内で同じuser_idを持つレコードの数を取得
         count = ExercisePlan.query.filter_by(user_id=getid).count()
         # 新しいidを生成 (renameにcountを結合)
-        new_id = getid+"plan"+str(count + 1)
+        new_id = getid + "plan" + str(count + 1)
         exerciseplan = ExercisePlan(
             id=new_id,
             user_id=getid,
@@ -86,8 +87,7 @@ def goal_setting():
         db.session.commit()
         return redirect(url_for("exercise.paln_setting_complete"))
     
-    return render_template("exercise/goal_setting.html", form=form)
-
+    return render_template("exercise/goal_setting.html", form=form, mode=mode)
 
 #プラン設計機能_設定完了
 @dt.route("/plansettingconplete")

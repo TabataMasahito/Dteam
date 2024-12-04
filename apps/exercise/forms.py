@@ -12,7 +12,7 @@ class ModeSelectForm(FlaskForm):
     ])
     submit = SubmitField('次へ')
 
-class GoolSettingForm(FlaskForm):
+class GoalSettingForm(FlaskForm):
     period = IntegerField(
         "期間",
         validators=[
