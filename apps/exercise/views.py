@@ -192,7 +192,7 @@ def confirm_your_goal():
     remainingdays = future_date - today
 
     # 前回のプランが終了していない場合はエラー画面へ
-    if remainingdays.days==0:
+    if remainingdays.days<=0:
            return render_template(
         "exercise/goal.html") 
 
