@@ -5,23 +5,29 @@
         <strong>メニュー</strong>
     </div>
     <div class="menu-container">
-        <a class="btn btn-outline-primary" href="{{ url_for('exercise.mode_select') }}">
-            運動プラン設計
+        <a href="{{ url_for('exercise.mode_select') }}" style="display:inline-block; text-decoration:none;">
+            <img src="{{ url_for('static', filename='images/icons/記事アイコン1.png') }}" alt="運動プラン設計" class="custom-image">
+            <br>運動プラン設計
+        </a>        
+        <a href="{{ url_for('exercise.exercise_menu_setting') }}" style="display:inline-block; text-decoration:none;">
+            <img src="{{ url_for('static', filename='images/icons/マッチョアイコン2.png') }}" alt="運動メニュー作成" class="custom-image">
+            <br>運動メニュー作成
         </a>
-        <a class="btn btn-outline-primary" href="{{ url_for('exercise.exercise_menu_setting') }}">
-            運動メニュー作成
+        <a href="{{ url_for('exercise.weight_transition_check') }}" style="display:inline-block; text-decoration:none;">
+            <img src="{{ url_for('static', filename='images/icons/折れ線グラフのアイコン素材.png') }}" alt="体重の推移確認" class="custom-image">
+            <br>体重の推移確認
         </a>
-        <a class="btn btn-outline-primary" href="{{ url_for('exercise.weight_transition_check') }}">
-            体重の推移確認
+        <a href="{{ url_for('exercise.weight_record') }}" style="display:inline-block; text-decoration:none;">
+            <img src="{{ url_for('static', filename='images/icons/体重計アイコン2.png') }}" alt="体重の記録" class="custom-image">
+            <br>体重の記録
         </a>
-        <a class="btn btn-outline-primary" href="{{ url_for('exercise.weight_record') }}">
-            体重の記録
+        <a href="{{ url_for('exercise.confirm_your_goal') }}" style="display:inline-block; text-decoration:none;">
+            <img src="{{ url_for('static', filename='images/icons/ゴールアイコン2.png') }}" alt="目標確認" class="custom-image">
+            <br>目標確認
         </a>
-        <a class="btn btn-outline-primary" href="{{ url_for('exercise.confirm_your_goal') }}">
-            目標確認
-        </a>
-        <a class="btn btn-outline-primary" href="{{ url_for('crud.user_edit', user_id=current_user.id) }}">
-            ユーザー情報管理
+        <a href="{{ url_for('crud.user_edit', user_id=current_user.id) }}" style="display:inline-block; text-decoration:none;">
+            <img src="{{ url_for('static', filename='images/icons/会員証のアイコン素材.png') }}" alt="ユーザー情報管理" class="custom-image">
+            <br>ユーザー情報管理
         </a>
     </div>
     <!-- <a href="https://twitter.com/intent/tweet?text=DZAP" target="_blank">Xにポストする</a> -->
@@ -29,4 +35,11 @@
         運動メニュー履歴
     </a>
 </div>
+<style>
+    .custom-image {
+        width: 100px;
+        height: auto; /* アスペクト比を保つ */
+    }
+</style>
+
 {% endblock %}
