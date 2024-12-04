@@ -5,27 +5,27 @@
         <strong>メニュー</strong>
     </div>
     <div class="menu-container">
-        <a href="{{ url_for('exercise.mode_select') }}" style="display:inline-block; text-decoration:none;">
+        <a href="{{ url_for('exercise.mode_select') }}" class="menu-item" style="text-decoration:none;">
             <img src="{{ url_for('static', filename='images/icons/運動プラン設計.png') }}" alt="運動プラン設計" class="custom-image">
             <br>運動プラン設計
         </a>        
-        <a href="{{ url_for('exercise.exercise_menu_setting') }}" style="display:inline-block; text-decoration:none;">
+        <a href="{{ url_for('exercise.exercise_menu_setting') }}" class="menu-item" style="text-decoration:none;">
             <img src="{{ url_for('static', filename='images/icons/運動メニュー作成.png') }}" alt="運動メニュー作成" class="custom-image">
             <br>運動メニュー作成
         </a>
-        <a href="{{ url_for('exercise.weight_transition_check') }}" style="display:inline-block; text-decoration:none;">
+        <a href="{{ url_for('exercise.weight_transition_check') }}" class="menu-item" style="text-decoration:none;">
             <img src="{{ url_for('static', filename='images/icons/体重の推移確認.png') }}" alt="体重の推移確認" class="custom-image">
             <br>体重の推移確認
         </a>
-        <a href="{{ url_for('exercise.weight_record') }}" style="display:inline-block; text-decoration:none;">
+        <a href="{{ url_for('exercise.weight_record') }}" class="menu-item" style="text-decoration:none;">
             <img src="{{ url_for('static', filename='images/icons/体重の記録.png') }}" alt="体重の記録" class="custom-image">
             <br>体重の記録
         </a>
-        <a href="{{ url_for('exercise.confirm_your_goal') }}" style="display:inline-block; text-decoration:none;">
+        <a href="{{ url_for('exercise.confirm_your_goal') }}" class="menu-item" style="text-decoration:none;">
             <img src="{{ url_for('static', filename='images/icons/目標確認.png') }}" alt="目標確認" class="custom-image">
             <br>目標確認
         </a>
-        <a href="{{ url_for('crud.user_edit', user_id=current_user.id) }}" style="display:inline-block; text-decoration:none;">
+        <a href="{{ url_for('crud.user_edit', user_id=current_user.id) }}" class="menu-item" style="text-decoration:none;">
             <img src="{{ url_for('static', filename='images/icons/ユーザー情報管理.png') }}" alt="ユーザー情報管理" class="custom-image">
             <br>ユーザー情報管理
         </a>
@@ -39,6 +39,23 @@
     .custom-image {
         width: 100px;
         height: auto; /* アスペクト比を保つ */
+    }
+    .menu-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* ボタン間のスペース */
+        justify-content: center;
+    }
+    .menu-item {
+        border: 2px solid #007bff; /* 外枠の色 */
+        border-radius: 8px; /* 外枠の角を丸くする */
+        padding: 10px; /* 内側の余白 */
+        text-align: center; /* テキストと画像を中央揃え */
+        transition: transform 0.2s, box-shadow 0.2s; /* ホバー時のアニメーション */
+    }
+    .menu-item:hover {
+        transform: scale(1.05); /* 少し拡大 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
     }
 </style>
 
