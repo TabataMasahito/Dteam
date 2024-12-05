@@ -1,0 +1,7 @@
+{% extends "exercise/base.html" %}
+{% block content %}
+<a href="https://twitter.com/intent/tweet?text=DZAPで{{mode}}！今日は{{exercise_time}}分運動しました！" target="_blank">Xにポストする</a>
+
+<a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+
+{% endblock %}
