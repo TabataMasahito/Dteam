@@ -32,6 +32,7 @@ def mode_select():
             .order_by(desc(ExercisePlan.record_at))
             .first()
         )
+        # 型の修正
         if record_at:
             record_at = record_at.record_at  
             if isinstance(record_at, str):
@@ -325,7 +326,7 @@ def exercise_menu():
     question = (
             "あなたはパーソナルトレーナーです。以下のユーザーの目的と期間に適した運動メニューを丁寧な言葉遣いで提案してください。\n"
             "運動の目的：{}、性別：{}、年齢：{}歳、身長：{}cm、初期の体重：{}kg、目標とする体重：{}kg、\n"
-            "現在の体重：{}kg、運動を行う期間：{}日です。また今日の運動メニューは運動器具は：{}、\n"
+            "現在の体重：{}kg、運動を行う期間：{}日です。また今日の運動メニューは運動器具や道具は：{}、\n"
             "運動の強度（強、中、弱）の中で：{}、運動時間は{}分と設定されています。\n"
             "では本日の運動メニューを教えてください。メニュー以外の情報は必要ありません。またウォームアップ、エクササイズ、クールダウンの３つに分け、すべて含めて運動時間内に終わるようにしてください。"
         ).format(mode, sex, age, height, weight, goal_weight, nowweight, period, exerciseitem, strength, minutes)
@@ -334,7 +335,6 @@ def exercise_menu():
     chat = model.start_chat(history=[])
     response = chat.send_message(question)
 
-    # 応答のフォーマット処理
     def format_response(response_text):
         # 応答が箇条書き形式になるよう整形
         lines = response_text.split('\n')
