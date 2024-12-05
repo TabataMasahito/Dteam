@@ -1,27 +1,44 @@
-<!-- 田端将人 -->
 {% extends "exercise/base.html" %}
 {% block title %}目標確認{% endblock %}
 {% block content %}
 
-    <div class="container my-5">
-        <a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
-        <header class="text-center mb-5">
-            <h3 class="font-weight-bold">目標確認</h3>
-        </header>
+<div class="container my-5">
+    <a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+    <header class="text-center mb-5">
+        <h3 class="font-weight-bold">目標確認</h3>
+    </header>
 
-        <div class="confirm mb-5 p-4 bg-light rounded shadow-lg">
-            <!-- 右側の画像 -->
-            <img src="" alt="Right Image" class="position-absolute end-0 top-50 translate-middle-y" style="width: 300px; height: auto;">
+    <div class="confirm mb-5 p-4 bg-light rounded shadow-lg position-relative">
+        <div class="d-flex justify-content-between align-items-center">
             <!-- 左側の画像 -->
-            <img src="" alt="Left Image" class="position-absolute start-0 top-50 translate-middle-y" style="width: 300px; height: auto;">
-            <span class="badge badge-success text-danger fs-4">{{ mode }}モード</span>
-            <p class="fs-4"><strong>残り日数:</strong> <span class="text-danger fs-3">{{ remainingdays }}</span> 日</p>
-            <p class="fs-4"><strong>目標体重:</strong> <span class="text-success fs-3">{{ goalweight }} kg</span></p>
-            <p class="fs-4"><strong>現在の体重:</strong> <span class="text-warning fs-3">{{ nowweight }} kg</span></p>
-            <p class="fs-4"><strong>目標体重まで:</strong> <span class="text-danger font-weight-bold fs-3">{{ remaining_weight }}</span> kg</p>
-            <p class="fs-4 mb-3 text-primary font-weight-bold">あなたならできる！</p>
-            <i class="fas fa-dumbbell text-primary fs-4 mb-3"></i>
-            <p class="fs-4 text-success font-weight-bold">一緒に頑張ろう！</p>
+            <div class="d-flex align-items-center">
+                <img src="{{ url_for('static', filename='images/icons/応援する女性.png') }}" 
+                     alt="Left Image" 
+                     class="img-fluid rounded-circle" 
+                     style="width: 250px; height: auto;">
+            </div>
+
+            <!-- 中央の目標情報 -->
+            <div class="text-center flex-grow-1">
+                <span class="badge badge-success text-danger fs-4">{{ mode }}モード</span>
+                <p class="fs-4"><strong>残り日数:</strong> <span class="text-danger fs-3">{{ remainingdays }}</span> 日</p>
+                <p class="fs-4"><strong>目標体重:</strong> <span class="text-success fs-3">{{ goalweight }} kg</span></p>
+                <p class="fs-4"><strong>現在の体重:</strong> <span class="text-warning fs-3">{{ nowweight }} kg</span></p>
+                <p class="fs-4"><strong>目標体重まで:</strong> <span class="text-danger font-weight-bold fs-3">{{ remaining_weight }}</span> kg</p>
+                <p class="fs-4 mb-3 text-primary font-weight-bold">あなたならできる！</p>
+                <i class="fas fa-dumbbell text-primary fs-4 mb-3"></i>
+                <p class="fs-4 text-success font-weight-bold">一緒に頑張ろう！</p>
+            </div>
+
+            <!-- 右側の画像 -->
+            <div class="d-flex align-items-center">
+                <img src="{{ url_for('static', filename='images/icons/応援する男性.png') }}" 
+                     alt="Right Image" 
+                     class="img-fluid rounded-circle" 
+                     style="width: 250px; height: auto;">
+            </div>
         </div>
     </div>
+</div>
+
 {% endblock %}
