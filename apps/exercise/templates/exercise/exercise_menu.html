@@ -8,6 +8,9 @@
     <div class="exercise_menu_title">
         <h2>{{ username }}さんの運動メニュー</h2>
     </div>
+    <a href="{{ url_for('exercise.menu_history') }}">
+        運動メニュー履歴
+    </a>
     <div class="d-flex justify-content-center">
         
         <pre id="response-container">{{ response }}</pre>
