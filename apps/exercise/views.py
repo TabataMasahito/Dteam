@@ -5,16 +5,21 @@ from apps.exercise.models import WeightRecord,ExercisePlan,ExerciseHistory
 from apps.app import db
 from flask_login import login_required,current_user
 from datetime import datetime,timedelta,date
-from sqlalchemy import desc
+from sqlalchemy import desc,func
 import google.generativeai as genai
 from flask import request
+
 # template_folderを指定する（staticは指定しない）
 dt = Blueprint("exercise", __name__, template_folder="templates")
 # dtアプリケーションを使ってエンドポイントを作成する
 @dt.route("/")
 @login_required
 def index():
-    return render_template("exercise/index.html")
+    today = date.today()
+    exercise_time = db.session.query(func.sum(ExerciseHistory.minutes)).filter_by(user_id=current_user.id, record_at=today).scalar()    
+    user_record_exists = ExercisePlan.query.filter_by(user_id=current_user.id).order_by(desc(ExercisePlan.record_at)).first()
+
+    return render_template("exercise/index.html",exercise_time=exercise_time,mode=user_record_exists.mode)
 
 #プラン設計機能_モード選択
 # dtアプリケーションを使ってmodeselectのエンドポイントを作成する
