@@ -30,9 +30,12 @@
             <br>ユーザー情報管理
         </a>
     </div>
-    <a href="https://twitter.com/intent/tweet?text=DZAPで{{mode}}！今日は{{exercise_time}}分運動しました！" target="_blank">Xにポストする</a>
     <a href="{{ url_for('exercise.menu_history') }}">
         運動メニュー履歴
+    </a>
+    <p></p>
+    <a href="{{ url_for('exercise.post') }}">
+        今日の成果をXポストする
     </a>
 </div>
 <style>

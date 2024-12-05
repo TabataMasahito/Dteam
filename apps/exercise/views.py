@@ -5,7 +5,7 @@ from apps.exercise.models import WeightRecord,ExercisePlan,ExerciseHistory
 from apps.app import db
 from flask_login import login_required,current_user
 from datetime import datetime,timedelta,date
-from sqlalchemy import desc
+from sqlalchemy import desc,func
 import google.generativeai as genai
 from flask import request
 # template_folderを指定する（staticは指定しない）
@@ -397,3 +397,28 @@ def menu_history():
                            menuhistory=menuhistory, 
                            username=current_user.username,
                            selected_date=history_date)
+
+
+
+
+
+
+
+
+
+# Xにポストする機能
+
+@dt.route("/post")
+@login_required
+def post():
+    today = date.today()
+    exercise_records = ExerciseHistory.query.filter_by(user_id=current_user.id).all()
+    # 運動プランが設計されていない場合はエラー画面へ
+    if not exercise_records:
+        return render_template("exercise/post_error.html")
+    
+    exercise_time = db.session.query(func.sum(ExerciseHistory.minutes)).filter_by(user_id=current_user.id, record_at=today).scalar()    
+    user_record_exists = ExercisePlan.query.filter_by(user_id=current_user.id).order_by(desc(ExercisePlan.record_at)).first()
+ 
+    return render_template("exercise/post.html",exercise_time=exercise_time,mode=user_record_exists.mode)
+ 
