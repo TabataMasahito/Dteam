@@ -50,6 +50,8 @@
                         {{ form.minutes(id="form-minutes", class="form-control w-50") }}
                         <span class="input-group-text">分</span>
                     </div>
+                    <input type="range" id="minutesSlider" min="1" max="120" step="1" class="form-range mt-2" oninput="updateField('form-minutes', this.value)">
+                    <span id="minutesDisplay" class="d-block text-center"></span>
                     {% for error in form.minutes.errors %}
                     <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
@@ -63,4 +65,10 @@
         </div>
     </div>
 </div>
+<script>
+    function updateField(inputId, value) {
+        const inputField = document.getElementById(inputId);
+        inputField.value = value;
+    }
+</script>
 {% endblock %}

@@ -10,62 +10,68 @@
     <p></p>
     <a href="{{ url_for('exercise.mode_select') }}">モード選択に戻る</a>
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white text-center">
-                    <h4>目標設定</h4>
-                </div>
-                <div class="card-body">
-                    <form id="goalForm" action="{{ url_for('exercise.goal_setting') }}" method="POST" novalidate="novalidate">
-                        {{ form.csrf_token }}
-
-                        <!-- 目標期間 -->
-                        <div class="form-group mb-3">
-                            <label for="form-period" class="form-label">目標期間</label>
-                            <div class="input-group">
-                                {{ form.period(id="form-period", class="form-control", placeholder="目標期間") }}
-                                <span class="input-group-text">日</span>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h4>目標設定</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="goalForm" action="{{ url_for('exercise.goal_setting') }}" method="POST" novalidate="novalidate">
+                            {{ form.csrf_token }}
+    
+                            <!-- 目標期間 -->
+                            <div class="form-group mb-3">
+                                <label for="form-period" class="form-label">目標期間</label>
+                                <div class="input-group">
+                                    {{ form.period(id="form-period", class="form-control", placeholder="目標期間") }}
+                                    <span class="input-group-text">日</span>
+                                </div>
+                                <input type="range" id="periodSlider" min="1" max="365" step="1" class="form-range mt-2" oninput="updateField('form-period', this.value)">
+                                <span id="periodDisplay" class="d-block text-center"></span>
+                                {% for error in form.period.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                                {% endfor %}
                             </div>
-                            {% for error in form.period.errors %}
-                            <div class="text-danger small">{{ error }}</div>
-                            {% endfor %}
-                        </div>
-
-                        <!-- 目標体重 -->
-                        <div class="form-group mb-3">
-                            <label for="form-goalweight" class="form-label">目標体重</label>
-                            <div class="input-group">
-                                {{ form.goalweight(id="form-goalweight", class="form-control", placeholder="目標体重") }}
-                                <span class="input-group-text">kg</span>
+    
+                            <!-- 目標体重 -->
+                            <div class="form-group mb-3">
+                                <label for="form-goalweight" class="form-label">目標体重</label>
+                                <div class="input-group">
+                                    {{ form.goalweight(id="form-goalweight", class="form-control", placeholder="目標体重") }}
+                                    <span class="input-group-text">kg</span>
+                                </div>
+                                <input type="range" id="goalWeightSlider" min="30" max="150" step="0.1" class="form-range mt-2" oninput="updateField('form-goalweight', this.value)">
+                                <span id="goalWeightDisplay" class="d-block text-center"></span>
+                                {% for error in form.goalweight.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                                {% endfor %}
                             </div>
-                            {% for error in form.goalweight.errors %}
-                            <div class="text-danger small">{{ error }}</div>
-                            {% endfor %}
-                        </div>
-
-                        <!-- 週の利用日数 -->
-                        <div class="form-group mb-3">
-                            <label for="form-numberexercisesweek" class="form-label">１週間の運動回数</label>
-                            <div class="input-group">
-                                {{ form.numberexercisesweek(id="form-numberexercisesweek", class="form-control", placeholder="１週間の運動回数") }}
-                                <span class="input-group-text">日</span>
+    
+                            <!-- 週の利用日数 -->
+                            <div class="form-group mb-3">
+                                <label for="form-numberexercisesweek" class="form-label">１週間の運動回数</label>
+                                <div class="input-group">
+                                    {{ form.numberexercisesweek(id="form-numberexercisesweek", class="form-control", placeholder="１週間の運動回数") }}
+                                    <span class="input-group-text">日</span>
+                                </div>
+                                <input type="range" id="exerciseDaysSlider" min="1" max="7" step="1" class="form-range mt-2" oninput="updateField('form-numberexercisesweek', this.value)">
+                                <span id="exerciseDaysDisplay" class="d-block text-center"></span>
+                                {% for error in form.numberexercisesweek.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                                {% endfor %}
                             </div>
-                            {% for error in form.numberexercisesweek.errors %}
-                            <div class="text-danger small">{{ error }}</div>
-                            {% endfor %}
-                        </div>
-
-                        <div class="d-grid mb-3">
-                            <button type="button" class="btn btn-primary btn-block" id="checkButton">作成</button>
-                        </div>
-                    </form>
+    
+                            <div class="d-grid mb-3">
+                                <button type="button" class="btn btn-primary btn-block" id="checkButton">作成</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 <!-- 確認用モーダル -->
 <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
@@ -121,5 +127,9 @@ document.addEventListener("DOMContentLoaded", function() {
         form.submit(); // フォームを送信
     });
 });
+function updateField(inputId, value) {
+        const inputField = document.getElementById(inputId);
+        inputField.value = value;
+    }
 </script>
 {% endblock %}

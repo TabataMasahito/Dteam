@@ -2,7 +2,6 @@
 {% block title %}ユーザー情報管理{% endblock %}
 {% block content %}
 <div class="container my-5">
-    <a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
     <header class="text-center mb-4">
         <h3>ユーザー情報管理</h3>
     </header>
@@ -33,7 +32,9 @@
             <!-- 年齢の変更 -->
             <div class="mb-3">
                 <label class="form-label" for="age">{{ form.age.label }}</label>
-                {{ form.age(class="form-control", placeholder=form.age.data) }}歳
+                {{ form.age(id="form-age", class="form-control", placeholder=form.age.data) }}歳
+                <input type="range" id="ageSlider" min="0" max="150" step="1" class="form-range mt-2" oninput="updateField('form-age', this.value)">
+                <span id="ageDisplay" class="d-block text-center"></span>
                 {% for error in form.age.errors %}
                 <div class="text-danger small">{{ error }}</div>
                 {% endfor %}
@@ -42,7 +43,9 @@
             <!-- 身長の変更 -->
             <div class="mb-3">
                 <label class="form-label" for="height">{{ form.height.label }}</label>
-                {{ form.height(class="form-control", placeholder=form.height.data) }} cm
+                {{ form.height(id="form-height", class="form-control", placeholder=form.height.data) }} cm
+                <input type="range" id="heightSlider" min="50" max="300" step="0.1" class="form-range mt-2" oninput="updateField('form-height', this.value)">
+                <span id="heightDisplay" class="d-block text-center"></span>
                 {% for error in form.height.errors %}
                 <div class="text-danger small">{{ error }}</div>
                 {% endfor %}
@@ -61,12 +64,22 @@
                 <input type="submit" class="btn btn-danger btn-block" value="アカウント削除" />
             </div>
         </form>
+
+        <p></p>
+        <div class="d-grid mb-4">
+            <p></p>
+            <a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+        </div>
     </div>
 
     <script>
         function confirmDeletion() {
             return confirm("本当に削除しますか？");
         }
+        function updateField(inputId, value) {
+        const inputField = document.getElementById(inputId);
+        inputField.value = value;
+    }
     </script>
 </div>
 {% endblock %}

@@ -17,19 +17,21 @@
                 </div>
                 {% endfor %}
 
+                <!-- 年齢 -->
                 <div class="mb-3">
                     <label for="age" class="form-label">年齢</label>
                     <div class="input-group">
-                        {{ form.age(class="form-control", placeholder="年齢") }}
+                        {{ form.age(id="form-age", class="form-control", placeholder="年齢") }}
                         <span class="input-group-text">歳</span>
                     </div>
-                        
-                    <small class="text-muted"></small>
+                    <input type="range" id="ageSlider" min="0" max="150" step="1" class="form-range mt-2" oninput="updateField('form-age', this.value)">
+                    <span id="ageDisplay" class="d-block text-center"></span>
                     {% for error in form.age.errors %}
                     <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
                 </div>
 
+                <!-- 性別 -->
                 <div class="mb-3">
                     <label class="form-label">性別</label>
                     <div class="d-flex gap-3">
@@ -45,25 +47,29 @@
                     {% endfor %}
                 </div>
 
+                <!-- 身長 -->
                 <div class="mb-3">
                     <label for="height" class="form-label">身長</label>
                     <div class="input-group">
-                        {{ form.height(class="form-control", placeholder="身長") }}
+                        {{ form.height(id="form-height", class="form-control", placeholder="身長") }}
                         <span class="input-group-text">cm</span>
                     </div>
-                    <small class="text-muted">単位: cm（小数も利用できます）</small>
+                    <input type="range" id="heightSlider" min="50" max="300" step="0.1" class="form-range mt-2" oninput="updateField('form-height', this.value)">
+                    <span id="heightDisplay" class="d-block text-center"></span>
                     {% for error in form.height.errors %}
                     <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
                 </div>
 
+                <!-- 体重 -->
                 <div class="mb-3">
                     <label for="weight" class="form-label">体重</label>
                     <div class="input-group">
-                        {{ form.weight(class="form-control", placeholder="体重") }}
+                        {{ form.weight(id="form-weight", class="form-control", placeholder="体重") }}
                         <span class="input-group-text">kg</span>
                     </div>
-                    <small class="text-muted">単位: kg（小数も利用できます）</small>
+                    <input type="range" id="weightSlider" min="1" max="150" step="0.1" class="form-range mt-2" oninput="updateField('form-weight', this.value)">
+                    <span id="weightDisplay" class="d-block text-center"></span>
                     {% for error in form.weight.errors %}
                     <div class="text-danger small">{{ error }}</div>
                     {% endfor %}
@@ -76,4 +82,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    function updateField(inputId, value) {
+        const inputField = document.getElementById(inputId);
+        inputField.value = value;
+    }
+</script>
 {% endblock %}
