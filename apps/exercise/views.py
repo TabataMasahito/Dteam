@@ -412,8 +412,7 @@ def menu_history():
 @login_required
 def post():
     today = date.today()
-    exercise_records = ExerciseHistory.query.filter_by(user_id=current_user.id).all()
-    # 運動プランが設計されていない場合はエラー画面へ
+    exercise_records = ExerciseHistory.query.filter_by(user_id=current_user.id,record_at=today).all()
     if not exercise_records:
         return render_template("exercise/post_error.html")
     
