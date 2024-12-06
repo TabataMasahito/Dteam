@@ -30,7 +30,7 @@ class CreateBody(FlaskForm):
         "年齢",
         validators=[
             DataRequired(message="すべての項目を入力してください"),
-            NumberRange(1,150,message="正しい数字を入力してください。")
+            NumberRange(0,150,message="正しい数字を入力してください。")
         ]
     )
     sex=RadioField(
@@ -42,7 +42,7 @@ class CreateBody(FlaskForm):
         "身長",
         validators=[
                 DataRequired(message="すべての項目を入力してください"),
-                NumberRange(1,300,message="正しい数字を入力してください。")
+                NumberRange(50,300,message="正しい数字を入力してください。")
             ]
         )
 
