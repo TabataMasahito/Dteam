@@ -18,14 +18,14 @@
             
             <!-- 中央のブランド -->
             <a class="navbar-brand mx-auto position-absolute" href="{{ url_for('exercise.index') }}" style="left: 50%; transform: translateX(-50%);">
-                DZAP
+                <img src="{{ url_for('static', filename='images/icons/DzapIconNew.png') }}">
             </a>
 
             <!-- 右側のリンク -->
             <div class="d-flex align-items-center">
                 {% if current_user.is_authenticated %}
                 <a href="{{ url_for('auth.logout') }}" class="nav-link text-light">ログアウト</a>
-                <span class="name text-light">　　{{ current_user.username }}</span>
+                <span class="name text-light">　　{{ current_user.username }}さん</span>
                 {% endif %}
             </div>
         </div>

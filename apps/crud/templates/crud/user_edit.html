@@ -2,7 +2,6 @@
 {% block title %}ユーザー情報管理{% endblock %}
 {% block content %}
 <div class="container my-5">
-    <a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
     <header class="text-center mb-4">
         <h3>ユーザー情報管理</h3>
     </header>
@@ -61,6 +60,12 @@
                 <input type="submit" class="btn btn-danger btn-block" value="アカウント削除" />
             </div>
         </form>
+
+        <p></p>
+        <div class="d-grid mb-4">
+            <p></p>
+            <a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+        </div>
     </div>
 
     <script>
