@@ -1,6 +1,9 @@
 {% extends "exercise/base.html" %}
 {% block content %}
-今日の運動が行われていないためポストできません
-<a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+<div class="errortext">
 
+    今日の運動が行われていないためポストできません
+    <p></p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+</div>
 {% endblock %}
