@@ -183,7 +183,7 @@ def confirm_your_goal():
     )
     nowweight = latest_weight_record.recordweight  # 最新の体重
 
-    exercise_plan = ExercisePlan.query.filter_by(user_id=user_id).first()
+    exercise_plan = ExercisePlan.query.filter_by(user_id=user_id).order_by(desc(ExercisePlan.period)).first()
     goalweight = exercise_plan.goalweight  # 目標体重
 
     remaining_weight = nowweight - goalweight if nowweight - goalweight > 0 else goalweight-nowweight
@@ -300,7 +300,7 @@ def exercise_menu_setting():
 @dt.route('/exercise_menu')
 @login_required  # ログインしていないとアクセスできないようにする
 def exercise_menu():
-    GOOGLE_API_KEY = "AIzaSyBqpBn0IK3SHtdlNTlyenP2APlj3Qz9LUs"
+    GOOGLE_API_KEY = "AIzaSyCIAKpoUtUYjyuHtqnhs9-OEU1kGjwetYI"
     genai.configure(api_key=GOOGLE_API_KEY)
 
     # モデルの設定
