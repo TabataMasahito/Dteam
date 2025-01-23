@@ -29,7 +29,7 @@ class CreateBody(FlaskForm):
     age=IntegerField(
         "年齢",
         validators=[
-            DataRequired(message="すべての項目を入力してください"),
+            DataRequired(message="この項目は必須です"),
             NumberRange(0,150,message="正しい数字を入力してください。")
         ]
     )
@@ -41,7 +41,7 @@ class CreateBody(FlaskForm):
     height=FloatField(
         "身長",
         validators=[
-                DataRequired(message="すべての項目を入力してください"),
+                DataRequired(message="この項目は必須です"),
                 NumberRange(50,300,message="正しい数字を入力してください。")
             ]
         )
@@ -49,7 +49,7 @@ class CreateBody(FlaskForm):
     weight=FloatField(
         "体重",
         validators=[
-                DataRequired(message="すべての項目を入力してください"),
+                DataRequired(message="この項目は必須です"),
                 NumberRange(1,150,message="正しい数字を入力してください。")
             ]
         )
