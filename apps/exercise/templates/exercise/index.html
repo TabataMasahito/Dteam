@@ -29,14 +29,16 @@
             <img src="{{ url_for('static', filename='images/icons/ユーザー情報管理.png') }}" alt="ユーザー情報管理" class="custom-image">
             <br>ユーザー情報管理
         </a>
-    </div>
-    <a href="{{ url_for('exercise.menu_history') }}">
-        運動メニュー履歴
-    </a>
-    <p></p>
-    <a href="{{ url_for('exercise.post') }}">
-        今日の成果をXポストする
-    </a>
+        <a href="{{ url_for('exercise.menu_history') }}" class="menu-item" style="text-decoration:none;">
+            <img src="{{ url_for('static', filename='images/icons/運動メニュー履歴.png') }}" alt="ユーザー情報管理" class="custom-image">
+            <br>運動メニュー履歴
+        </a>
+        <a href="{{ url_for('exercise.post') }}" class="menu-item" style="text-decoration:none;">
+            <img src="{{ url_for('static', filename='images/icons/SNSシェア.png') }}" alt="ユーザー情報管理" class="custom-image">
+            <br>今日の成果をXポストする
+        </a>
+        
+
 </div>
 <style>
     .custom-image {

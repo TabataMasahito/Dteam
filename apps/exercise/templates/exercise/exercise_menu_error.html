@@ -2,12 +2,14 @@
 {% block title %}体重記録{% endblock %}
 {% block content %}
 
-<a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
 
 <div class="errortext">
-    <p>本日の運動プランの作成上限に達しました。</p>
+    <p>本日の運動メニューの作成上限に達しました。</p>
     <a href="{{ url_for('exercise.menu_history') }}">
         運動メニュー履歴
     </a>
+    <p></p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+
 </div>
 {% endblock %}
