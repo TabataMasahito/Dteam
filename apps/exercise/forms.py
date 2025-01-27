@@ -39,7 +39,7 @@ class WeightRecordForm(FlaskForm):
     recordweight = FloatField(
         "体重",
         validators=[
-                DataRequired(message="体重は必須です。"),
+                DataRequired(message="この項目は必須です。"),
                 NumberRange(1,150,message="正しい数字を入力してください。")
             ]
         )
