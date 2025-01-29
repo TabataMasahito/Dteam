@@ -2,7 +2,9 @@
 {% block title %}体重記録{% endblock %}
 {% block content %}
 <div class="container mt-5">
-    <div class="card">
+    <div class="card mx-auto shadow-lg" style="max-width: 600px;">
+
+
         <div class="card-header text-center bg-primary text-white">
             <h2>体重記録</h2>
         </div>
@@ -10,7 +12,6 @@
             <form action="{{ url_for('exercise.weight_record') }}" method="POST" novalidate="novalidate">
                 {{ form.csrf_token }}
                 
-                <!-- 既存の入力フォーム -->
                 <div class="form-group">
                     <label for="recordweight">体重</label>
                     {{ form.recordweight(class="form-control", placeholder="体重") }}kg

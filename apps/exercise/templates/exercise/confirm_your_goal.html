@@ -3,7 +3,6 @@
 {% block content %}
 
 <div class="container my-5">
-    <a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
     <header class="text-center mb-5">
         <h3 class="font-weight-bold">目標確認</h3>
     </header>
@@ -38,7 +37,10 @@
                      style="width: 250px; height: auto;">
             </div>
         </div>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+
     </div>
+    
 </div>
 
 {% endblock %}

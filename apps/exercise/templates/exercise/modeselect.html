@@ -4,7 +4,6 @@
 {% block title %}運動モード選択{% endblock %}
 
 {% block content %}
-<a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -35,8 +34,12 @@
                             <strong>{{ error }}</strong>
                         </div>
                         {% endfor %}
-
-                        <button type="submit" class="btn btn-primary btn-block">選択する</button>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary btn-block">選択する</button>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <a class="btn btn-primary btn-lg" href="{{ url_for('exercise.index') }}">メニューへ戻る</a>
+                        </div>
                     </form>
                 </div>
             </div>
